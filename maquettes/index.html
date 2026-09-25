@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%23111%27/%3E%3C/svg%3E">
+<title>Maquettes — portfolio Benjamin Abensur</title>
+<style>
+:root{--ink:#111;--muted:#666;--line:#e3e3e3;--bg:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;padding:clamp(1.5rem,4vw,4rem);max-width:1100px;margin:0 auto}
+h1{font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:.5rem}
+.lead{color:var(--muted);max-width:70ch;margin-bottom:2.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+.card{border:1px solid var(--line);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;color:inherit;text-decoration:none;transition:border-color .2s}
+.card:hover{border-color:var(--ink)}
+.swatch{height:120px;display:flex;align-items:flex-end;padding:1rem;font-weight:700;font-size:1.5rem;letter-spacing:-.02em}
+.card h2{font-size:1.25rem;line-height:1.2}
+.card h2 small{display:block;font-weight:400;color:var(--muted);font-size:.9rem;margin-top:.25rem}
+.concept{font-size:1rem}
+dl{display:grid;grid-template-columns:auto 1fr;gap:.35rem .9rem;font-size:.9rem;border-top:1px solid var(--line);padding-top:.9rem}
+dt{color:var(--muted)}
+dd{font-weight:500}
+.open{margin-top:auto;font-weight:600}
+.open::after{content:" →"}
+.notes{margin-top:3rem;border-top:1px solid var(--line);padding-top:1.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;font-size:.95rem}
+.notes h3{font-size:1rem;margin-bottom:.5rem}
+.notes ul{padding-left:1.1rem;color:#333}
+.notes li{margin-bottom:.35rem}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;background:#f3f3f3;padding:.05em .3em}
+</style>
+</head>
+<body>
+<h1>Portfolio Benjamin Abensur — 4 maquettes</h1>
+<p class="lead">Quatre directions franches pour la même page d'accueil one-page (préloader 0→100 %, hero nom animé + typo kinetic, curseur custom et boutons magnétiques, labels de section, 5 case studies numérotés avec une métrique, liste compacte avec aperçu au hover, timeline « journey », marquee photo, coin musique, contact direct). Tout le texte et tous les chiffres viennent du CV V5 et de la note « Portfolio web — contenu ». Chaque fichier est autonome (CSS/JS inline, GSAP + Lenis via CDN).</p>
+
+<div class="grid">
+  <a class="card" href="01-sodium.html">
+    <div class="swatch" style="background:#0c0c0c;color:#f2a93b;font-family:Impact,'Arial Black',sans-serif">SODIUM</div>
+    <h2>01 · Sodium <small>Un club à 2 h du matin</small></h2>
+    <p class="concept">Noir profond, une seule lampe au sodium, une typo large qui roule comme un sub. Le « deck » musique a un compteur de temps géant.</p>
+    <dl>
+      <dt>Labels</dt><dd>( parenthèses )</dd>
+      <dt>Palette</dt><dd>Sombre · accent ambre sodium</dd>
+      <dt>3D</dt><dd>Aucune</dd>
+      <dt>Fonts</dt><dd>Panchang + Switzer (Fontshare)</dd>
+      <dt>Hero kinetic</dt><dd>Lettres montantes, mot qui roule, lignes qui s'écartent au scroll</dd>
+    </dl>
+    <span class="open">Ouvrir la maquette</span>
+  </a>
+
+  <a class="card" href="02-releve.html">
+    <div class="swatch" style="background:#fff;color:#cf3418;border:1px solid #e3e3e3;font-family:'Arial Black',Impact,sans-serif">RELEVÉ</div>
+    <h2>02 · Relevé <small>Le relevé de compte d'un ingénieur</small></h2>
+    <p class="concept">Papier blanc, encre noire, filets, un tampon rouge. Chaque projet réduit à sa preuve, montant à droite comme sur un relevé.</p>
+    <dl>
+      <dt>Labels</dt><dd>[ CROCHETS ]</dd>
+      <dt>Palette</dt><dd>Clair · un rouge tampon ≤ 10 %</dd>
+      <dt>3D</dt><dd>Aucune</dd>
+      <dt>Fonts</dt><dd>Archivo (variable, axe largeur) + Source Serif 4 (Google)</dd>
+      <dt>Hero kinetic</dt><dd>Le nom s'imprime en s'élargissant (axe wdth 62→125) puis se comprime au scroll</dd>
+    </dl>
+    <span class="open">Ouvrir la maquette</span>
+  </a>
+
+  <a class="card" href="03-porteuse.html">
+    <div class="swatch" style="background:linear-gradient(90deg,#fff 50%,#16181d 50%);color:#e4572e;font-family:'Arial Narrow',Arial,sans-serif;font-stretch:condensed">PORTEUSE</div>
+    <h2>03 · Porteuse <small>Une onde porteuse</small></h2>
+    <p class="concept">Bandes claires et sombres qui alternent comme des demi-périodes ; le hero est une surface 3D qui ondule et le nom respire sur l'axe de largeur. Le player est un tuner.</p>
+    <dl>
+      <dt>Labels</dt><dd>( parenthèses ) larges</dd>
+      <dt>Palette</dt><dd>Clair avec sections sombres · accent orange signal</dd>
+      <dt>3D</dt><dd>Surface filaire 3D en canvas (projection maison, sans librairie)</dd>
+      <dt>Fonts</dt><dd>Anybody (variable, largeur 50→150) + Onest (Google)</dd>
+      <dt>Hero kinetic</dt><dd>Onde de largeur qui traverse les lettres en continu</dd>
+    </dl>
+    <span class="open">Ouvrir la maquette</span>
+  </a>
+
+  <a class="card" href="04-cobalt.html">
+    <div class="swatch" style="background:#1c3ab5;color:#f3d35b;font-family:Georgia,'Times New Roman',serif;font-style:italic">Cobalt</div>
+    <h2>04 · Cobalt <small>Bleu de travail</small></h2>
+    <p class="concept">Une seule couleur habite la page ; le nom est un objet 3D qu'on fait tourner à la souris. Le player est un 45 tours qui tourne.</p>
+    <dl>
+      <dt>Labels</dt><dd>[ crochets ] en italique</dd>
+      <dt>Palette</dt><dd>Couleur d'accent forte : cobalt « drenched » + papier froid + craie jaune</dd>
+      <dt>3D</dt><dd>Nom extrudé en CSS 3D (perspective, lettres en profondeur, tilt souris)</dd>
+      <dt>Fonts</dt><dd>Zodiak + Satoshi (Fontshare)</dd>
+      <dt>Hero kinetic</dt><dd>Lettres qui basculent en 3D, nom qui s'incline au scroll</dd>
+    </dl>
+    <span class="open">Ouvrir la maquette</span>
+  </a>
+</div>
+
+<div class="notes">
+  <div>
+    <h3>Commun aux quatre</h3>
+    <ul>
+      <li>Préloader compteur 0→100 % avec sortie en rideau incurvé (Snellenberg).</li>
+      <li>Curseur custom (masqué sur écran tactile) et boutons magnétiques.</li>
+      <li>Case studies 01–05 : Kairo &amp; Trame (16 000+), Cortex (~28k lignes), VeriReason (en cours, aucun chiffre inventé), bibliothèque logique (42/42), projet systèmes (~6 300 lignes).</li>
+      <li>Journey en 9 étapes, de Blender à 13 ans à Biosynex (oct. 2026).</li>
+      <li><code>prefers-reduced-motion</code> respecté : pas de préloader, pas de kinetic, marquee statique et scrollable, 3D figée.</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Placeholders honnêtes</h3>
+    <ul>
+      <li>Photos : cadres numérotés « coming », aucune image de stock.</li>
+      <li>Musique : les deux titres réels (THE HANDOFF v2 · 8:22, esquisse afro house · 1:20) avec leurs vraies durées, mais sans fichier audio : le player affiche « preview coming ». Renseigner <code>data-src</code> pour le rendre fonctionnel.</li>
+      <li>Kairo : code privé, « screens on request » en attendant des captures.</li>
+      <li>Photo pro (CV/assets) utilisée en petit dans la section About.</li>
+    </ul>
+  </div>
+  <div>
+    <h3>À trancher</h3>
+    <ul>
+      <li>Diplôme : le CV V5 dit « expected 2028 », la note contenu disait 2027. Les maquettes suivent le CV (2028) ; le stage visé reste été 2027.</li>
+      <li>Le CV PDF lié est la version « General » (Scout Summer Camp).</li>
+      <li>Sneakers : formulation V5 « partner, team of 4 », plus « fondateur de Flare AIO ».</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

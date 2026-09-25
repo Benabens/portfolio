@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# vercel
+.vercel/
+
+# env / secrets — never commit
+.env
+.env.*
+
+# local working notes (not part of the site)
+BRIEF-*.md
+PRODUCT.md
+.brief-sent-at
+.build-sent-at
+
+# os
+.DS_Store
