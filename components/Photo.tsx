@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 import { prefersReducedMotion, useMotion } from "@/lib/motion";
 import { setupReveals } from "@/lib/reveals";
+import { useSectionMotion } from "@/lib/useSectionMotion";
 import { photoIntro, photoRows } from "@/content";
 import type { PhotoFrame } from "@/content";
 
@@ -27,12 +28,10 @@ export default function Photo() {
   const scope = useRef<HTMLElement>(null);
   const { lenis } = useMotion();
 
-  useGSAP(
-    () => {
-      if (!scope.current) return;
-      setupReveals(scope.current);
+  useSectionMotion(scope, (root) => {
+      setupReveals(root);
       if (prefersReducedMotion()) return;
-      const rows = gsap.utils.selector(scope)<HTMLElement>(".marquee");
+      const rows = gsap.utils.selector(root)<HTMLElement>(".marquee");
       const tickers = rows.map((m, i) => {
         const track = m.querySelector<HTMLElement>(".marquee-track")!;
         const dir = i % 2 === 0 ? -1 : 1;
@@ -64,9 +63,7 @@ export default function Photo() {
         };
       });
       return () => tickers.forEach((fn) => fn());
-    },
-    { scope },
-  );
+  });
 
   return (
     <section className="section photo" id="photo" ref={scope} aria-labelledby="photo-h">

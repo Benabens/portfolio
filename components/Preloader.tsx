@@ -42,21 +42,23 @@ export default function Preloader() {
       const curtain = el.querySelector<SVGPathElement>("path");
       const counter = { v: 0 };
 
+      // 1.2 s count, then the curtain: about 2.3 s in total (the mockup ran 3.3 s;
+      // shorter keeps the moment and helps Speed Index on slow connections).
       const tl = gsap.timeline({ onComplete: finish });
       tl.to(counter, {
         v: 100,
-        duration: 1.7,
+        duration: 1.2,
         ease: "power2.inOut",
         onUpdate: () => {
           if (num) num.textContent = String(Math.round(counter.v));
           if (fill) fill.style.width = counter.v + "%";
         },
       })
-        .to(el, { "--wd": 125, duration: 1.7, ease: "power2.inOut" }, 0)
-        .to(curtain, { attr: { d: CURVED }, duration: 0.45, ease: "power2.in" }, "+=0.15")
-        .to(el, { yPercent: -114, duration: 1, ease: "power4.inOut" }, "<0.05")
-        .to(curtain, { attr: { d: FLAT }, duration: 0.5, ease: "power2.out" }, "-=0.45")
-        .add(() => startIntro(), "-=0.75");
+        .to(el, { "--wd": 125, duration: 1.2, ease: "power2.inOut" }, 0)
+        .to(curtain, { attr: { d: CURVED }, duration: 0.4, ease: "power2.in" }, "+=0.1")
+        .to(el, { yPercent: -114, duration: 0.85, ease: "power4.inOut" }, "<0.05")
+        .to(curtain, { attr: { d: FLAT }, duration: 0.45, ease: "power2.out" }, "-=0.4")
+        .add(() => startIntro(), "-=0.65");
     },
     { scope: ref },
   );

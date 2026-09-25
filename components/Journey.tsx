@@ -1,18 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { useGSAP } from "@/lib/gsap";
+import { useSectionMotion } from "@/lib/useSectionMotion";
 import { setupReveals } from "@/lib/reveals";
 import { journey, journeyIntro } from "@/content";
 
 export default function Journey() {
   const scope = useRef<HTMLElement>(null);
-  useGSAP(
-    () => {
-      if (scope.current) setupReveals(scope.current);
-    },
-    { scope },
-  );
+  useSectionMotion(scope, setupReveals);
 
   return (
     <section className="section" id="journey" ref={scope} aria-labelledby="journey-h">

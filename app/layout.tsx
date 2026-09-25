@@ -18,13 +18,15 @@ const archivo = Archivo({
 // italic only carries a few emphasised words and loads on demand.
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
-  style: ["normal"],
+  weight: "400",
+  style: "normal",
   variable: "--font-source-serif",
   display: "swap",
 });
 const sourceSerifItalic = Source_Serif_4({
   subsets: ["latin"],
-  style: ["italic"],
+  weight: "400",
+  style: "italic",
   variable: "--font-source-serif-italic",
   display: "swap",
   preload: false,

@@ -4,6 +4,7 @@ import { useRef, type MouseEvent, type PointerEvent } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { hasFinePointer, prefersReducedMotion, useMotion } from "@/lib/motion";
 import { setupReveals } from "@/lib/reveals";
+import { useSectionMotion } from "@/lib/useSectionMotion";
 import { moreIntro, sideProjects } from "@/content";
 import type { SideProject } from "@/content";
 
@@ -15,17 +16,14 @@ export default function MoreWork() {
   const py = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
   const { scrollTo } = useMotion();
 
-  const { contextSafe } = useGSAP(
-    () => {
-      if (!scope.current) return;
-      setupReveals(scope.current);
-      if (peek.current && hasFinePointer() && !prefersReducedMotion()) {
-        px.current = gsap.quickTo(peek.current, "x", { duration: 0.5, ease: "power3" });
-        py.current = gsap.quickTo(peek.current, "y", { duration: 0.5, ease: "power3" });
-      }
-    },
-    { scope },
-  );
+  useSectionMotion(scope, (el) => {
+    setupReveals(el);
+    if (peek.current && hasFinePointer() && !prefersReducedMotion()) {
+      px.current = gsap.quickTo(peek.current, "x", { duration: 0.5, ease: "power3" });
+      py.current = gsap.quickTo(peek.current, "y", { duration: 0.5, ease: "power3" });
+    }
+  });
+  const { contextSafe } = useGSAP(() => {}, { scope });
 
   const show = contextSafe((project: SideProject) => {
     const el = peek.current;

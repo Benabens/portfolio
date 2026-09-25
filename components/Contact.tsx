@@ -1,19 +1,14 @@
 "use client";
 
 import { useRef } from "react";
-import { useGSAP } from "@/lib/gsap";
+import { useSectionMotion } from "@/lib/useSectionMotion";
 import { setupReveals } from "@/lib/reveals";
 import { contactIntro, site } from "@/content";
 import Clock from "./Clock";
 
 export default function Contact() {
   const scope = useRef<HTMLElement>(null);
-  useGSAP(
-    () => {
-      if (scope.current) setupReveals(scope.current);
-    },
-    { scope },
-  );
+  useSectionMotion(scope, setupReveals);
 
   return (
     <section className="section contact" id="contact" ref={scope} aria-labelledby="contact-h">

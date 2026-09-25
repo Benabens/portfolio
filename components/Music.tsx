@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { setupReveals } from "@/lib/reveals";
+import { useSectionMotion } from "@/lib/useSectionMotion";
 import { mmss } from "@/lib/format";
 import { musicIntro, tracks } from "@/content";
 
@@ -31,12 +32,8 @@ export default function Music() {
   const [note, setNote] = useState("");
   const track = tracks[index];
 
-  const { contextSafe } = useGSAP(
-    () => {
-      if (scope.current) setupReveals(scope.current);
-    },
-    { scope },
-  );
+  useSectionMotion(scope, setupReveals);
+  const { contextSafe } = useGSAP(() => {}, { scope });
 
   const pulse = contextSafe(() => {
     if (playBtn.current) gsap.fromTo(playBtn.current, { scale: 0.92 }, { scale: 1, duration: 0.6, ease: "expo.out" });

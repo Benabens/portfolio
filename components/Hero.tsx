@@ -32,11 +32,13 @@ export default function Hero() {
         gsap.fromTo(secondLine, { x: 0 }, { x: -40, ease: "none", immediateRender: false, scrollTrigger: st });
       };
       const tl = gsap.timeline({ defaults: { ease: "expo.out" }, onComplete: scrollKinetics });
+      // Transforms only: the statement (mobile LCP element) is never faded out,
+      // and the stamp is never caught half-transparent by contrast audits.
       tl.from(q(".line-in"), { yPercent: 105, duration: 1.1, stagger: 0.12 })
         .to(h1, { "--wd": 125, duration: 1.4, ease: "power3.inOut" }, "-=0.7")
-        .from(q(".hero-top"), { opacity: 0, y: -10, duration: 0.8 }, "-=1.2")
-        .from(q(".hero-grid"), { opacity: 0, y: 24, duration: 0.9 }, "-=1")
-        .from(q(".stamp"), { opacity: 0, scale: 1.6, rotate: -14, duration: 0.5, ease: "power4.out" }, "-=0.4");
+        .from(q(".hero-top"), { y: -10, duration: 0.8 }, "-=1.2")
+        .from(q(".hero-grid"), { y: 24, duration: 0.9 }, "-=1")
+        .from(q(".stamp"), { scale: 1.6, rotate: -14, duration: 0.5, ease: "power4.out" }, "-=0.4");
     },
     { scope, dependencies: [intro] },
   );

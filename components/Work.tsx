@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useGSAP } from "@/lib/gsap";
+import { useSectionMotion } from "@/lib/useSectionMotion";
 import { setupCounters, setupReveals } from "@/lib/reveals";
 import { caseStudies, workIntro } from "@/content";
 import type { CaseStudy } from "@/content";
@@ -39,14 +39,10 @@ function Title({ study }: { study: CaseStudy }) {
 export default function Work() {
   const scope = useRef<HTMLElement>(null);
 
-  useGSAP(
-    () => {
-      if (!scope.current) return;
-      setupReveals(scope.current);
-      setupCounters(scope.current);
-    },
-    { scope },
-  );
+  useSectionMotion(scope, (el) => {
+    setupReveals(el);
+    setupCounters(el);
+  });
 
   return (
     <section className="section" id="work" ref={scope} aria-labelledby="work-h">
