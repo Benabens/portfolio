@@ -23,8 +23,8 @@ export type CaseStudy = {
   metric: {
     /** Text shown when the count-up is not running (also the final value). */
     value: string;
-    /** Optional count-up. `target` counts from 0; prefix/suffix wrap the number. */
-    count?: { target: number; prefix?: string; suffix?: string; after?: string };
+    /** Optional count-up. `target` counts from 0; prefix/suffix wrap the number; `decimals` keeps e.g. 2.75. */
+    count?: { target: number; prefix?: string; suffix?: string; after?: string; decimals?: number };
     caption: string;
   };
   tags: string[];

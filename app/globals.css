@@ -133,7 +133,8 @@ h2 em{font-style:normal;color:var(--red)}
 .row-t{font-weight:600;font-size:clamp(1.15rem,2vw,1.6rem);letter-spacing:-.01em}
 .row-d{display:block;font-family:var(--text);color:var(--muted);font-size:1rem;margin-top:.15rem}
 .row-y{font-size:.8rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-#peek{position:fixed;z-index:var(--z-peek);left:0;top:0;width:min(300px,70vw);pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.92);background:var(--bg);border:1.5px solid var(--ink);padding:1.1rem 1.25rem;will-change:transform,opacity}
+#peek{position:absolute;z-index:var(--z-peek);left:0;top:0;width:min(300px,70vw);pointer-events:none;opacity:0;transform:scale(.92);background:var(--bg);border:1.5px solid var(--ink);padding:1.1rem 1.25rem;will-change:transform,opacity}
+.has-peek{position:relative;overflow:clip}
 #peek b{display:block;font-family:var(--display);font-weight:800;color:var(--red);font-size:1.9rem;line-height:1;letter-spacing:-.02em;margin-bottom:.5rem;font-variation-settings:"wdth" 88}
 #peek span{display:block;font-size:.95rem;line-height:1.45;color:var(--muted)}
 @media (max-width:520px){.row a{grid-template-columns:2.2rem 1fr}.row-y{display:none}}

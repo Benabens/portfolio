@@ -70,8 +70,10 @@ export function setupCounters(scope: HTMLElement) {
     const target = Number(el.dataset.count);
     const prefix = el.dataset.prefix ?? "";
     const suffix = el.dataset.suffix ?? "";
+    const decimals = Number(el.dataset.decimals ?? 0);
     const render = (v: number) => {
-      el.textContent = prefix + Math.round(v).toLocaleString("en-US") + suffix;
+      el.textContent =
+        prefix + v.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
     };
     render(target);
     if (prefersReducedMotion()) return;

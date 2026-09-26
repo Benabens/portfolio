@@ -40,9 +40,18 @@ export default function Interactions() {
       if (to && el.contains(to)) return;
       cur.dataset.state = "";
     };
+    // A scroll can move a link away from a still pointer without any
+    // pointerout: reset hover states so nothing stays stuck.
+    const rest: Array<() => void> = [];
+    const reset = () => {
+      cur.dataset.state = "";
+      rest.forEach((fn) => fn());
+    };
     window.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerover", onOver);
     document.addEventListener("pointerout", onOut);
+    window.addEventListener("scroll", reset, { passive: true });
+    window.addEventListener("blur", reset);
 
     // Magnetic buttons: pulled toward the pointer, released with an expo ease.
     const cleanups = Array.from(document.querySelectorAll<HTMLElement>("[data-magnetic]")).map((el) => {
@@ -57,6 +66,7 @@ export default function Interactions() {
         x(0);
         y(0);
       };
+      rest.push(leave);
       el.addEventListener("pointermove", move);
       el.addEventListener("pointerleave", leave);
       return () => {
@@ -69,6 +79,8 @@ export default function Interactions() {
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerover", onOver);
       document.removeEventListener("pointerout", onOut);
+      window.removeEventListener("scroll", reset);
+      window.removeEventListener("blur", reset);
       cleanups.forEach((fn) => fn());
       root.classList.remove("has-cursor", "is-live");
     };

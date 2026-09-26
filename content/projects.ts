@@ -1,6 +1,7 @@
 import type { CaseStudy, SideProject } from "./types";
 
-// Projects. Every figure comes from CV V5 (2026-09-25); nothing here is invented.
+// Projects. Every figure comes from CV V5 (2026-09-25) or was measured in the
+// public repositories on 2026-09-26 (see the comments); nothing is invented.
 // To add a case study: append to `caseStudies` (keep the numbering).
 // To add a small project: append to `sideProjects`.
 
@@ -9,7 +10,7 @@ export const workIntro = {
   title: "Five projects, ",
   titleEmphasis: "one number",
   titleEnd: " each.",
-  note: "Every figure on this page is on my CV and holds up in an interview.",
+  note: "Every figure on this page is on my CV or measured in the public repo, and holds up in an interview.",
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -47,22 +48,48 @@ export const caseStudies: CaseStudy[] = [
     link: { label: "github.com/Benabens/cortex", href: "https://github.com/Benabens/cortex" },
   },
   {
-    id: "verireason",
+    // Measured in github.com/Benabens/ReCHor on 2026-09-26: timetable/2025-05-28/connections.bin
+    // is 33,001,128 bytes at 12 bytes per connection (4 × U16 + S32 in BufferedConnections),
+    // i.e. 2,750,094 connections; 44 source files, 24 test classes, 160 @Test methods,
+    // 258 MB of timetables for 7 days (26 May → 1 June 2025). Pair confirmed by the @author tags.
+    id: "rechor",
     number: "03",
-    title: "VeriReason",
-    stack: "PyTorch",
+    title: "ReCHor",
+    stack: "Java 22 · JavaFX 21 · EPFL CS-108, in a pair",
     summary:
-      "A decoder-only Transformer written from first principles, to test whether a small model learns reusable algorithms rather than memorising answers. Trained on procedurally generated tasks with automatically verifiable answers. Written so far: task generation, tokenizer, batched pipeline with padding and loss masking, embeddings. Attention, the training loop and verifier-driven RL post-training are in progress.",
+      "A desktop journey planner for the whole Swiss public-transport network. For a date, a time and two stops it returns every Pareto-optimal journey, trading arrival time against changes, by scanning the day's connections once in reverse chronological order (Connection Scan Algorithm) over memory-mapped, bit-packed timetable files that are never deserialised. JavaFX front end with accent-insensitive stop autocomplete, journey details, iCalendar and GeoJSON export, and the heavy work kept off the UI thread; 44 classes, 160 JUnit tests.",
     metric: {
-      value: "In progress",
-      caption: "no number yet, and none invented until the model trains.",
+      value: "2.75 M",
+      count: { target: 2.75, suffix: " M", decimals: 2 },
+      caption:
+        "connections in one weekday of the real CFF timetable, scanned in a single pass per query. 258 MB of binary data for seven days, read from memory-mapped files.",
     },
-    tags: ["transformer from scratch"],
-    link: { label: "github.com/Benabens/verireason", href: "https://github.com/Benabens/verireason" },
+    tags: ["journey planner", "open source"],
+    link: { label: "github.com/Benabens/ReCHor", href: "https://github.com/Benabens/ReCHor" },
+    note: "Desktop app · screens coming",
+  },
+  {
+    // Measured in github.com/Benabens/ICoop on 2026-09-26: iccoop/src/main/java holds 40 files and
+    // 3,695 lines (CV: ~3,700), 24 actor classes, 4 areas (Spawn, Maze, Arena, OrbWay), boss HellSkull;
+    // the course engine (game-engine/, 110 files) was kept unmodified (CONCEPTION.md).
+    id: "icoop",
+    number: "04",
+    title: "ICoop",
+    stack: "Java · PlayEngine (course engine) · EPFL CS-107, in a pair",
+    summary:
+      "A two-player cooperative 2D game in the spirit of Fireboy and Watergirl, on the course's engine. A fire player and a water player cross the map together: each one passes what the other cannot, every interaction between players, projectiles, enemies and elemental walls goes through double dispatch, and each cell decides what can walk or fly over it. Four areas, keys, orbs, bombs, a chest added beyond the brief, and a final boss with ranged attacks and a conditional weak spot.",
+    metric: {
+      value: "~3,700",
+      count: { target: 3700, prefix: "~" },
+      caption: "lines of game code, in 24 actor classes and 4 areas, written on top of an unmodified course engine.",
+    },
+    tags: ["co-op game", "open source"],
+    link: { label: "github.com/Benabens/ICoop", href: "https://github.com/Benabens/ICoop" },
+    note: "Two-player game · screens coming",
   },
   {
     id: "digital-logic",
-    number: "04",
+    number: "05",
     title: "Digital-logic library",
     stack: "Verilog",
     summary:
@@ -75,21 +102,6 @@ export const caseStudies: CaseStudy[] = [
     tags: ["hardware", "open source"],
     link: { label: "github.com/Benabens/fds-digital-logic", href: "https://github.com/Benabens/fds-digital-logic" },
   },
-  {
-    id: "systems",
-    number: "05",
-    title: "Systems project",
-    stack: "C · POSIX sockets · pthreads · EPFL CS-202, in a pair",
-    summary:
-      "Reliable file transfer over TCP then UDP with one-way delay measurement. A UNIX v6 filesystem (inodes, directories, mount) behind a command-line tool, with unit tests. A multithreaded file server with per-file locking.",
-    metric: {
-      value: "~6,300",
-      count: { target: 6300, prefix: "~" },
-      caption: "lines of C.",
-    },
-    tags: ["networking", "filesystems"],
-    note: "Course project · no public repository",
-  },
 ];
 
 export const moreIntro = {
@@ -99,23 +111,46 @@ export const moreIntro = {
 
 export const sideProjects: SideProject[] = [
   {
-    id: "rechor",
+    id: "systems",
     number: "06",
-    title: "ReCHor",
-    description: "Public-transport journey planner · Java, JavaFX",
-    context: "CS-108",
-    href: "https://github.com/Benabens/ReCHor",
-    external: true,
+    title: "Systems project",
+    description: "Networking and UNIX filesystem in C · POSIX sockets, pthreads · in a pair",
+    context: "CS-202",
+    href: "#more",
+    external: false,
     peek: {
-      big: "~258 MB",
-      text: "of CFF timetable, every Pareto-optimal journey between two Swiss stops. 44 classes, ~3,600 lines of tests.",
+      big: "~6,300",
+      text: "lines of C: reliable file transfer over TCP then UDP with one-way delay measurement, a UNIX v6 filesystem behind a CLI, a multithreaded file server with per-file locking.",
     },
   },
   {
-    id: "addiction",
+    id: "verireason",
     number: "07",
-    title: "Gaming addiction prediction",
-    description: "ML from scratch in NumPy, no ML libraries · team of 3",
+    title: "VeriReason",
+    description: "Decoder-only Transformer from first principles · PyTorch",
+    context: "in progress",
+    href: "https://github.com/Benabens/verireason",
+    external: true,
+    peek: {
+      big: "In progress",
+      text: "task generation, tokenizer, batched pipeline and embeddings written; attention, training loop and verifier-driven RL still to come. No number until it trains.",
+    },
+  },
+  {
+    id: "qrcode",
+    number: "08",
+    title: "QR-code generator",
+    description: "Reed–Solomon error correction and masking, by hand · Java",
+    context: "CS-107",
+    href: "https://github.com/Benabens",
+    external: true,
+    peek: { big: "Reed–Solomon", text: "error correction and masking, implemented by hand." },
+  },
+  {
+    id: "mlp-kmeans",
+    number: "09",
+    title: "MLP & K-means from scratch",
+    description: "Gaming-addiction prediction in NumPy, no ML libraries · team of 3",
     context: "CS-233",
     href: "https://github.com/Benabens/addiction-classifier-numpy",
     external: true,
@@ -125,40 +160,10 @@ export const sideProjects: SideProject[] = [
     },
   },
   {
-    id: "icoop",
-    number: "08",
-    title: "ICoop",
-    description: "Two-player cooperative 2D game · Java",
-    context: "CS-107",
-    href: "https://github.com/Benabens/ICoop",
-    external: true,
-    peek: { big: "~3,700", text: "lines of Java. Fire-and-water co-op with a boss fight; interactions via double dispatch." },
-  },
-  {
-    id: "qrcode",
-    number: "09",
-    title: "QR-code generator",
-    description: "Java",
-    context: "CS-107",
-    href: "https://github.com/Benabens",
-    external: true,
-    peek: { big: "Reed–Solomon", text: "error correction and masking, implemented by hand." },
-  },
-  {
-    id: "course-monitor",
-    number: "10",
-    title: "EPFL course monitor",
-    description: "Python scraper, scheduled pipeline, email alerts",
-    context: "side",
-    href: "#more",
-    external: false,
-    peek: { big: "every 6 h", text: "a scheduled scraper that detects course and professor changes and sends email alerts." },
-  },
-  {
     id: "simulators",
-    number: "11",
+    number: "10",
     title: "Mechanics simulators",
-    description: "Interactive explainers for PHYS-101",
+    description: "Interactive explainers for the PHYS-101 students I teach",
     context: "teaching",
     href: "#journey",
     external: false,

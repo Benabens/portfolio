@@ -17,7 +17,7 @@ function Metric({ metric }: { metric: CaseStudy["metric"] }) {
   if (!c) return <span className="metric">{metric.value}</span>;
   return (
     <span className="metric">
-      <span data-count={c.target} data-prefix={c.prefix} data-suffix={c.suffix}>
+      <span data-count={c.target} data-prefix={c.prefix} data-suffix={c.suffix} data-decimals={c.decimals}>
         {metric.value.replace(c.after ?? "", "")}
       </span>
       {c.after}

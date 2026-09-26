@@ -40,6 +40,7 @@ Every figure comes from the CV and holds up in an interview; nothing is invented
 npm install
 npm run dev      # http://localhost:3000
 npm run build && npm start
+npm run test:e2e   # hover/scroll regression checks against a running site (needs Chrome)
 ```
 
 ## Design exploration
