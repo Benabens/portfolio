@@ -19,6 +19,6 @@ export const profile = {
     { label: "School", value: "EPFL, Lausanne" },
     { label: "Expected graduation", value: "2028" },
     { label: "Looking for", value: "Software engineering or applied ML, Summer 2027" },
-    { label: "Languages", value: "French, English, Hebrew, Spanish" },
+    { label: "Languages", value: "French (native), English (fluent), Hebrew (basic), Spanish (basic)" },
   ] satisfies Fact[],
 };
