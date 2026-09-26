@@ -88,19 +88,29 @@ export const caseStudies: CaseStudy[] = [
     note: "Two-player game · screens coming",
   },
   {
-    id: "digital-logic",
+    // Figures from the README and the milestone-2 report of
+    // github.com/Benabens/addiction-classifier-numpy (test set, checked on 2026-09-26):
+    // MLP with sigmoid + MSE: 85.25 % accuracy, macro-F1 0.546, recall on "High" 0.00.
+    // MLP with softmax + inverse-frequency weighted cross-entropy (w = [0.48, 1.21, 10.4]):
+    // 84.50 %, 0.757, 0.69. Rare class = 44 of 1,280 training samples (~3 %). Team of 3 per
+    // the README and CV V5, which rounds the F1 jump to 0.55 → 0.76.
+    id: "addiction",
     number: "05",
-    title: "Digital-logic library",
-    stack: "Verilog",
+    title: "Gaming Addiction Prediction",
+    stack: "Python · NumPy, no ML libraries · EPFL CS-233, team of 3",
     summary:
-      "42 synthesizable modules, from logic gates to a processor register file, each with its own self-checking testbench. Self-initiated and ungraded.",
+      "Predicts gaming-addiction level (three classes) and score (0–10) from gaming and mental-health data with five models written entirely in NumPy: k-nearest neighbours, linear and softmax logistic regression, K-Means and a multi-layer perceptron with hand-written backpropagation, every gradient checked against finite differences. The point is what accuracy hides: the first MLP scored 85% while never once predicting the rare class. Weighting the loss by inverse class frequency fixed that. Two written reports, 5-fold cross-validation.",
     metric: {
-      value: "42/42",
-      count: { target: 42, after: "/42" },
-      caption: "self-checking testbenches passing, zero warnings.",
+      value: "0 → 0.69",
+      count: { target: 0.69, prefix: "0 → ", decimals: 2 },
+      caption:
+        "recall on the rarest class (3% of the data) once the cross-entropy is weighted by inverse class frequency. Macro-\u2060F1 0.55 → 0.76, for 0.75 points of accuracy.",
     },
-    tags: ["hardware", "open source"],
-    link: { label: "github.com/Benabens/fds-digital-logic", href: "https://github.com/Benabens/fds-digital-logic" },
+    tags: ["ML from scratch", "open source"],
+    link: {
+      label: "github.com/Benabens/addiction-classifier-numpy",
+      href: "https://github.com/Benabens/addiction-classifier-numpy",
+    },
   },
 ];
 
@@ -147,16 +157,17 @@ export const sideProjects: SideProject[] = [
     peek: { big: "Reed–Solomon", text: "error correction and masking, implemented by hand." },
   },
   {
-    id: "mlp-kmeans",
+    // CV V5: 42 synthesizable Verilog modules, 42/42 self-checking testbenches, zero warnings.
+    id: "digital-logic",
     number: "09",
-    title: "MLP & K-means from scratch",
-    description: "Gaming-addiction prediction in NumPy, no ML libraries · team of 3",
-    context: "CS-233",
-    href: "https://github.com/Benabens/addiction-classifier-numpy",
+    title: "Digital-logic library",
+    description: "42 synthesizable modules with self-checking testbenches, logic gates to a register file · Verilog",
+    context: "self-initiated",
+    href: "https://github.com/Benabens/fds-digital-logic",
     external: true,
     peek: {
-      big: "0.55 → 0.76",
-      text: "macro-F1 with inverse-frequency weighted cross-entropy, 5-fold CV. KNN, regressions, K-Means and an MLP with hand-written backprop.",
+      big: "42/42",
+      text: "self-checking testbenches passing, zero warnings. Built on my own time, outside any course, and ungraded.",
     },
   },
   {
