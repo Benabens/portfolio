@@ -94,7 +94,8 @@ for (const city of cities) {
         for (const [ext, encode] of Object.entries(FORMATS)) {
           const file = path.join(dir, `${stem}-band-${size}.${ext}`);
           const img = sharp(src).rotate().extract(region).resize(size, null, { withoutEnlargement: true });
-          if (FORCE || (await newer(src, file))) {
+          // Always rebuilt: the crop depends on coverFocus, not only on the original.
+          {
             const out = await encode(img).toFile(file);
             const check = await sharp(file).metadata();
             if (check.exif || check.xmp || check.iptc || check.icc) throw new Error(`Metadata left in ${file}`);

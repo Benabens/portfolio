@@ -136,7 +136,7 @@ function ClipFigure({ media }: { media: Clip }) {
       <figcaption>
         <span className="fig-n">Fig. {media.figure}</span>
         <span className="fig-cap">{media.caption}</span>
-        <button type="button" className="fig-ctl" onClick={toggle} aria-pressed={playing}>
+        <button type="button" className="fig-ctl" onClick={toggle}>
           {playing ? "Pause" : "Play"}
         </button>
       </figcaption>

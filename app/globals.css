@@ -141,6 +141,7 @@ h2 em{font-style:normal;color:var(--red)}
 .fig-ctl::before{content:"[ ";color:var(--muted)}
 .fig-ctl::after{content:" ]";color:var(--muted)}
 .fig-ctl:hover{color:var(--red)}
+@media (max-width:520px){.fig figcaption{grid-template-columns:auto minmax(0,1fr)}.fig-ctl{grid-column:1/-1;justify-self:start;text-align:left}}
 @media (min-width:521px){.figs{grid-column:2/-1}}
 
 /* confusion matrices, redrawn as tables: one hue, darker = larger share of the row */
@@ -203,6 +204,7 @@ h2 em{font-style:normal;color:var(--red)}
 /* labels sit on ink plates: readable on any photo */
 .city-top span{background:var(--ink);color:#fff;padding:.3rem .55rem}
 .city-top span:empty{display:none}
+.city-top span:last-child{margin-left:auto}
 /* .45s: the row is fully open inside the 500 ms that follow the click, so it never counts as a layout shift */
 .city-row{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .45s var(--ease-out),visibility 0s .45s}
 .city.is-open .city-row{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .45s var(--ease-out),visibility 0s}

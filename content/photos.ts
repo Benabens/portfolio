@@ -57,7 +57,7 @@ export const cities: City[] = [
     country: "Spain",
     year: "2024 – 2025",
     cover: "IBZ-01",
-    coverFocus: "50% 52%",
+    coverFocus: "50% 42%",
     coverTone: "light",
     // IBZ and IBZ2 are the same island, two summers. Left out: IBZ-03 (screen capture).
     photos: ["IBZ-04", "IBZ-06", "IBZ2-02", "IBZ2-03", "IBZ2-04"],
