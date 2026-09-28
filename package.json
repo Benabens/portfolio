@@ -2,13 +2,14 @@
   "name": "portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Benjamin Abensur — one-page portfolio (Next.js, GSAP, Lenis)",
+  "description": "Benjamin Abensur \u2014 one-page portfolio (Next.js, GSAP, Lenis)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test:e2e": "node scripts/hover-states.mjs"
+    "test:e2e": "node scripts/hover-states.mjs",
+    "photos": "node scripts/photos.mjs"
   },
   "engines": {
     "node": ">=20.9"

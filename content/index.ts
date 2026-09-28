@@ -5,6 +5,7 @@ export * from "./projects";
 export * from "./journey";
 export * from "./music";
 export * from "./photos";
+export * from "./photos.generated";
 
 export const contactIntro = {
   label: "Contact",
