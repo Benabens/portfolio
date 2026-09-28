@@ -5,6 +5,7 @@ import { useSectionMotion } from "@/lib/useSectionMotion";
 import { setupCounters, setupReveals } from "@/lib/reveals";
 import { caseStudies, workIntro } from "@/content";
 import type { CaseStudy } from "@/content";
+import Figure from "./Figure";
 
 const Arrow = () => (
   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -81,6 +82,13 @@ export default function Work() {
               <Metric metric={study.metric} />
               <span className="metric-cap">{study.metric.caption}</span>
             </div>
+            {study.media && (
+              <div className="figs">
+                {study.media.map((media) => (
+                  <Figure media={media} key={media.figure} />
+                ))}
+              </div>
+            )}
           </li>
         ))}
       </ol>

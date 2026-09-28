@@ -31,6 +31,30 @@ export const caseStudies: CaseStudy[] = [
     },
     tags: ["AI career CRM", "live, behind login"],
     note: "Private code · screens on request",
+    media: [
+      {
+        kind: "video",
+        figure: "1",
+        src: "/work/kairo/landing.mp4",
+        webm: "/work/kairo/landing.webm",
+        poster: "/work/kairo/landing.jpg",
+        width: 1280,
+        height: 720,
+        alt: "Kairo landing page hero: a headline in French over a dark green scene where a ball rolls along a rail.",
+        caption:
+          "Kairo landing, hero mockup in progress (September 2026). The on-screen figures are demo copy; the app itself sits behind a login.",
+      },
+      {
+        kind: "image",
+        figure: "2",
+        src: "/work/kairo/trame-capture.png",
+        width: 1440,
+        height: 900,
+        alt: "Trame capture screen: a freeform note about a meeting, and the contact card proposed from it with its fields highlighted.",
+        caption:
+          "Trame, capture screen (design mockup, fictional contacts): a freeform note becomes a structured contact card.",
+      },
+    ],
   },
   {
     id: "cortex",
@@ -46,6 +70,19 @@ export const caseStudies: CaseStudy[] = [
     },
     tags: ["exam generation", "open source"],
     link: { label: "github.com/Benabens/cortex", href: "https://github.com/Benabens/cortex" },
+    media: [
+      {
+        kind: "video",
+        figure: "3",
+        src: "/work/cortex/landing.mp4",
+        webm: "/work/cortex/landing.webm",
+        poster: "/work/cortex/landing.jpg",
+        width: 1280,
+        height: 720,
+        alt: "Cortex landing page hero: the headline over a slowly moving network of light points on black.",
+        caption: "Cortex landing, hero draft of July 2026. The background loop is a generated video; the copy is a working draft.",
+      },
+    ],
   },
   {
     // Measured in github.com/Benabens/ReCHor on 2026-09-26: timetable/2025-05-28/connections.bin
@@ -112,6 +149,23 @@ export const caseStudies: CaseStudy[] = [
       label: "github.com/Benabens/addiction-classifier-numpy",
       href: "https://github.com/Benabens/addiction-classifier-numpy",
     },
+    media: [
+      {
+        // Counts read off Figure 2 (a) and (b) of reports/milestone2_report.pdf.
+        kind: "matrix",
+        figure: "4",
+        classes: ["Low", "Medium", "High"],
+        panels: [
+          { title: "Before: sigmoid + MSE", rows: [[266, 14, 0], [32, 75, 0], [0, 13, 0]] },
+          { title: "After: softmax + weighted cross-entropy", rows: [[258, 22, 0], [31, 71, 5], [0, 4, 9]] },
+        ],
+        mark: [2, 2],
+        note: "Rows: true class. Columns: predicted class. Shade: share of the true class.",
+        alt: "Two confusion matrices on the 400 test samples. Before, none of the 13 High samples is predicted High. After, 9 of 13 are.",
+        caption:
+          "Test-set confusion matrices, redrawn from the milestone-2 report (400 samples). The baseline never predicts High; the weighted loss recovers 9 of 13.",
+      },
+    ],
   },
 ];
 
