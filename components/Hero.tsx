@@ -60,21 +60,25 @@ export default function Hero() {
         {letters(profile.lastName)}
       </h1>
       <div className="hero-grid">
-        <p className="hero-statement">
-          {profile.statement}
-          <em>{profile.statementEmphasis}</em>
-        </p>
-        <div className="meta-wrap">
-          <Image
-            className="id-photo"
-            src={profile.photo.src}
-            alt={profile.photo.alt}
-            width={profile.photo.width}
-            height={profile.photo.height}
-            sizes="104px"
-            priority
-          />
+        <figure className="portrait">
+          <span className="portrait-frame">
+            <Image
+              src={profile.photo.src}
+              alt={profile.photo.alt}
+              width={profile.photo.width}
+              height={profile.photo.height}
+              sizes="(max-width: 820px) 92vw, 24rem"
+              priority
+            />
+          </span>
           <span className="stamp">{profile.stamp}</span>
+          <figcaption>{profile.photo.caption}</figcaption>
+        </figure>
+        <div className="hero-side">
+          <p className="hero-statement">
+            {profile.statement}
+            <em>{profile.statementEmphasis}</em>
+          </p>
           <ul className="meta" data-reveal="rows">
             {profile.facts.map((f) => (
               <li key={f.label}>

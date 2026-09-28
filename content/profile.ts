@@ -13,7 +13,14 @@ export const profile = {
     "I build software end to end and ship it, I teach two first-year courses, and I take on things outside engineering ",
   statementEmphasis: "when they are worth doing.",
   stamp: "Open · Summer 2027 internship",
-  photo: { src: "/photo.jpg", alt: "Benjamin Abensur", width: 720, height: 720 },
+  /** Replace /public/photo.jpg with a larger file (1,600 px wide or more) and update width/height. */
+  photo: {
+    src: "/photo.jpg",
+    alt: "Portrait of Benjamin Abensur",
+    width: 720,
+    height: 720,
+    caption: "Fig. 0 — Benjamin Abensur, Lausanne",
+  },
   facts: [
     { label: "Field", value: "Communication Systems, BSc" },
     { label: "School", value: "EPFL, Lausanne" },
