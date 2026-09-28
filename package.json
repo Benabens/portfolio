@@ -9,7 +9,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test:e2e": "node scripts/hover-states.mjs",
-    "photos": "node scripts/photos.mjs"
+    "photos": "node scripts/photos.mjs",
+    "test:visuals": "node scripts/visuals.mjs"
   },
   "engines": {
     "node": ">=20.9"

@@ -40,7 +40,12 @@ function Band({ city }: { city: City }) {
           <span className="city-img">
             <Pic city={city.id} stem={city.cover} band alt="" sizes="100vw" style={{ objectPosition: city.coverFocus }} />
           </span>
-          <span className="city-name">{city.name}</span>
+          {/* One line per part of the name: the line count never changes while the width axis moves. */}
+          <span className="city-name">
+            {city.name.split(/(?<=–) /).map((line) => (
+              <span key={line}>{line} </span>
+            ))}
+          </span>
           <span className="city-top">
             <span>{where}</span>
             <span>{count(total)}</span>
