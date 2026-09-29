@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { photoMeta } from "@/content";
+import { photoMeta } from "@/content/photos.generated";
 
 type Props = {
   /** Folder under /photos/. */

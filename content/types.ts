@@ -103,6 +103,8 @@ export type Track = {
 export type City = {
   /** Folder under public/photos/ and DOM id. */
   id: string;
+  /** true: the band is not shown and none of its photos is generated or served. */
+  hidden?: boolean;
   /** Set in Archivo on the width axis over the cover. */
   name: string;
   country: string;

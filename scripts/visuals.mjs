@@ -6,6 +6,7 @@
 import puppeteer from "puppeteer-core";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
+import { cities } from "../content/photos.ts";
 
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const BASE = (process.argv[2] || "http://localhost:3000").replace(/\/$/, "") + "/";
@@ -131,7 +132,7 @@ for (const view of VIEWS) {
     rowImgs: document.querySelectorAll(".strip img").length,
     covers: [...document.querySelectorAll(".city-img img")].slice(0, 2).map((i) => i.currentSrc.split("/").pop()),
   }));
-  check(`${view.key}: ten bands, rows not mounted before opening`, before.bands === 10 && before.rowImgs === 0, before);
+  check(`${view.key}: one band per listed city, rows not mounted before opening`, before.bands === cities.length && before.rowImgs === 0, { ...before, expected: cities.length });
   await to(await top("#city-montreal", 70));
   await shot("band");
   const press = async (sel) => {
@@ -174,6 +175,9 @@ for (const view of VIEWS) {
   }));
   check(`${view.key}: no horizontal overflow`, page_.scrollW <= page_.innerW, page_);
   check(`${view.key}: layout shift under 0.05 over the whole scroll`, page_.cls < 0.05, { cls: page_.cls });
+  const served = await page.evaluate(() => [...new Set([...document.documentElement.outerHTML.matchAll(/\/photos\/([a-z-]+)\//g)].map((m) => m[1]))]);
+  const listed = cities.map((c) => c.id);
+  check(`${view.key}: only listed bands are referenced`, served.every((id) => listed.includes(id)), { served });
   check(`${view.key}: no console error, no failed request`, errors.length === 0, errors.slice(0, 5));
   await page.close();
 }

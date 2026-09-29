@@ -1,8 +1,8 @@
 import type { City } from "./types";
 
 // Photo section: one band per city, the cover first, then the rest of the roll.
-// All 65 photos of ~/Pictures/Portfolio are shown (Ben's decision, 30 September
-// 2026); only the covers are chosen without an identifiable face in the
+// All the photos of ~/Pictures/Portfolio are listed (Ben's decision, 30 September
+// 2026), a band can be switched off with `hidden: true`; only the covers are chosen without an identifiable face in the
 // foreground. A photo is referenced by its source stem "<CODE>-NN" from
 // ~/Pictures/Portfolio/<CODE>/ (originals, not in the repo).
 // Web versions: `npm run photos` (scripts/photos.mjs) writes public/photos/<id>/
@@ -15,7 +15,7 @@ export const photoIntro = {
   note: "Open a band to see the rest of the roll.",
 };
 
-export const cities: City[] = [
+const bands: City[] = [
   {
     id: "montreal",
     name: "Montréal",
@@ -34,6 +34,7 @@ export const cities: City[] = [
   },
   {
     id: "tel-aviv",
+    hidden: true, // Off for now (Ben, 30 September 2026): delete this line to bring the band back, then `npm run photos`.
     name: "Tel Aviv",
     country: "Israel",
     year: "", // TODO Ben: confirmer l'année
@@ -213,3 +214,6 @@ export const cities: City[] = [
     },
   },
 ];
+
+/** The bands that are shown. A hidden band is ignored by the site and by the pipeline. */
+export const cities: City[] = bands.filter((city) => !city.hidden);

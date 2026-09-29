@@ -19,4 +19,5 @@ cover, photos, alt texts) and, for every photo, finds the original
 
 Every file is auto-oriented, converted to sRGB and stripped of all metadata (EXIF, GPS,
 XMP, ICC); the script fails if anything is left. Files of photos that are no longer
-selected are removed. After the originals are graded, running the script again is enough.
+selected are removed, and so are those of a band marked `hidden: true` in
+`content/photos.ts`: delete that line and run the script to bring the band back. After the originals are graded, running the script again is enough.
