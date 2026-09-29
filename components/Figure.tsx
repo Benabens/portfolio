@@ -117,21 +117,32 @@ function ClipFigure({ media }: { media: Clip }) {
   return (
     <>
       <div className="fig-frame">
-        <video
-          ref={video}
-          className="fig-media"
-          width={media.width}
-          height={media.height}
-          poster={media.poster}
-          preload="none"
-          muted
-          loop
-          playsInline
-          aria-label={media.alt}
-        >
-          <source src={media.src} type="video/mp4" />
-          {media.webm && <source src={media.webm} type="video/webm" />}
-        </video>
+        {/* The still is a lazy image under the clip, not a `poster`: a poster is fetched
+            with the page even when the clip sits far below the fold. */}
+        <div className="fig-clip" style={{ aspectRatio: `${media.width} / ${media.height}` }}>
+          <Image
+            className="fig-still"
+            src={media.poster}
+            alt=""
+            width={media.width}
+            height={media.height}
+            sizes="(max-width: 820px) 100vw, 44rem"
+          />
+          <video
+            ref={video}
+            className="fig-media"
+            width={media.width}
+            height={media.height}
+            preload="none"
+            muted
+            loop
+            playsInline
+            aria-label={media.alt}
+          >
+            <source src={media.src} type="video/mp4" />
+            {media.webm && <source src={media.webm} type="video/webm" />}
+          </video>
+        </div>
       </div>
       <figcaption>
         <span className="fig-n">Fig.&nbsp;{media.figure}</span>

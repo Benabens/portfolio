@@ -48,7 +48,7 @@ export type CaseMedia =
       src: string;
       /** WebM alternative of the clip. */
       webm?: string;
-      /** Shown before play, and as the still when motion is reduced. */
+      /** The still under the clip: shown before play and when motion is reduced (loaded lazily). */
       poster: string;
       /** Intrinsic size: reserves the box before the media loads (no layout shift). */
       width: number;
