@@ -131,8 +131,8 @@ for (const view of VIEWS) {
     rowImgs: document.querySelectorAll(".strip img").length,
     covers: [...document.querySelectorAll(".city-img img")].slice(0, 2).map((i) => i.currentSrc.split("/").pop()),
   }));
-  check(`${view.key}: nine bands, rows not mounted before opening`, before.bands === 9 && before.rowImgs === 0, before);
-  await to(await top("#city-tel-aviv", 70));
+  check(`${view.key}: ten bands, rows not mounted before opening`, before.bands === 10 && before.rowImgs === 0, before);
+  await to(await top("#city-montreal", 70));
   await shot("band");
   const press = async (sel) => {
     const r = await page.evaluate((s) => {
@@ -142,25 +142,26 @@ for (const view of VIEWS) {
     if (view.viewport.hasTouch) await page.touchscreen.tap(r.x, r.y);
     else await page.mouse.click(r.x, r.y);
   };
-  await press("#city-tel-aviv .city-cover");
+  await press("#city-montreal .city-cover");
   await sleep(1800);
   const open = await page.evaluate(() => {
-    const li = document.querySelector("#city-tel-aviv");
+    const li = document.querySelector("#city-montreal");
     const row = li.querySelector(".city-row").getBoundingClientRect();
     const imgs = [...li.querySelectorAll(".strip img")];
     return {
       expanded: li.querySelector(".city-cover").getAttribute("aria-expanded"),
       rowHeight: Math.round(row.height),
       photos: imgs.length,
+      announced: parseInt(li.querySelector(".city-top span:last-child").textContent, 10),
       loaded: imgs.filter((i) => i.complete && i.naturalWidth > 0).length,
       format: imgs[0]?.currentSrc.split(".").pop(),
     };
   });
-  check(`${view.key}: a band opens on its row`, open.expanded === "true" && open.rowHeight > 100 && open.photos === 5, open);
+  check(`${view.key}: a band opens on its row`, open.expanded === "true" && open.rowHeight > 100 && open.photos === open.announced - 1, open);
   await shot("band-open");
-  await press("#city-tel-aviv .city-cover");
+  await press("#city-montreal .city-cover");
   await sleep(1200);
-  const closed = await page.evaluate(() => Math.round(document.querySelector("#city-tel-aviv .city-row").getBoundingClientRect().height));
+  const closed = await page.evaluate(() => Math.round(document.querySelector("#city-montreal .city-row").getBoundingClientRect().height));
   check(`${view.key}: and closes again`, closed === 0, { closed });
 
   // ---- whole page ----

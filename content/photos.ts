@@ -1,9 +1,9 @@
 import type { City } from "./types";
 
-// Photo section: one band per city, the cover first, then up to six photos.
-// Provisional selection (Ben has not chosen yet). No cover has an identifiable
-// face in the foreground, and frames where people can be recognised were left
-// out. A photo is referenced by its source stem "<CODE>-NN" from
+// Photo section: one band per city, the cover first, then the rest of the roll.
+// All 65 photos of ~/Pictures/Portfolio are shown (Ben's decision, 30 September
+// 2026); only the covers are chosen without an identifiable face in the
+// foreground. A photo is referenced by its source stem "<CODE>-NN" from
 // ~/Pictures/Portfolio/<CODE>/ (originals, not in the repo).
 // Web versions: `npm run photos` (scripts/photos.mjs) writes public/photos/<id>/
 // and content/photos.generated.ts. Re-run it once the originals are graded.
@@ -23,13 +23,13 @@ export const cities: City[] = [
     year: "2026",
     cover: "MTL-01",
     coverFocus: "50% 35%",
-    // Left out: MTL-05, an AI-retouched frame (snow added with Firefly).
-    photos: ["MTL-02", "MTL-03", "MTL-04"],
+    photos: ["MTL-02", "MTL-03", "MTL-04", "MTL-05"],
     alts: {
       "MTL-01": "Two office towers lit against a deep blue night sky",
       "MTL-02": "A downtown street between towers at dusk, street lamps on",
       "MTL-03": "A glass residential tower seen from below",
       "MTL-04": "Snow-covered firs under a chairlift",
+      "MTL-05": "A school bus parked by a snowbank between office towers",
     },
   },
   {
@@ -40,8 +40,7 @@ export const cities: City[] = [
     todo: "année",
     cover: "TLV-04",
     coverFocus: "50% 45%",
-    // Left out: TLV-01 and TLV-03 (crowds).
-    photos: ["TLV-08", "TLV-07", "TLV-06", "TLV-05", "TLV-02"],
+    photos: ["TLV-08", "TLV-07", "TLV-06", "TLV-05", "TLV-02", "TLV-01", "TLV-03"],
     alts: {
       "TLV-04": "Palm trees and a street lamp against a stormy sunset over the sea",
       "TLV-08": "The sun going down behind clouds over the sea",
@@ -49,6 +48,8 @@ export const cities: City[] = [
       "TLV-06": "A marina seen from above, the sea glittering behind it",
       "TLV-05": "The beach and its palm trees under a wide blue sky",
       "TLV-02": "A DJ booth seen from behind, a fist raised over the decks",
+      "TLV-01": "A crowd in front of a stage decorated with a giant mask, at night",
+      "TLV-03": "A DJ booth with a laptop and decks, smoke and blue light over the crowd",
     },
   },
   {
@@ -59,8 +60,8 @@ export const cities: City[] = [
     cover: "IBZ-01",
     coverFocus: "50% 42%",
     coverTone: "light",
-    // IBZ and IBZ2 are the same island, two summers. Left out: IBZ-03 (screen capture).
-    photos: ["IBZ-04", "IBZ-06", "IBZ2-02", "IBZ2-03", "IBZ2-04"],
+    // IBZ and IBZ2 are the same island, two summers.
+    photos: ["IBZ-04", "IBZ-06", "IBZ-02", "IBZ-03", "IBZ-05", "IBZ2-01", "IBZ2-02", "IBZ2-03", "IBZ2-04"],
     alts: {
       "IBZ-01": "The Ibiza letters and two giant red cherries on a paved square",
       "IBZ-04": "A pool at dusk",
@@ -68,14 +69,17 @@ export const cities: City[] = [
       "IBZ2-02": "The Ibiza letters, planted with greenery, along a road",
       "IBZ2-03": "The Ushuaïa stage and its crowd at sunset",
       "IBZ2-04": "The Ushuaïa stage at night, flames on both sides",
+      "IBZ-02": "Two men greeting each other in front of a stage lit in red",
+      "IBZ-03": "Fireworks over the Ushuaïa stage, phones raised in the crowd",
+      "IBZ-05": "Bottles in hexagonal shelves above a bucket of champagne",
+      "IBZ2-01": "A laptop running a music session on an aeroplane tray table",
     },
   },
   {
     id: "mexico",
-    name: "Mexico", // TODO Ben: confirmer le lieu exact
+    name: "Mexico",
     country: "Mexico",
     year: "2025",
-    todo: "lieu exact",
     cover: "MX2-04",
     coverFocus: "50% 40%",
     photos: ["MX2-01", "MX2-02", "MX2-03", "MX2-05", "MX2-06"],
@@ -119,28 +123,27 @@ export const cities: City[] = [
     },
   },
   {
-    id: "mrb",
-    name: "MRB", // TODO Ben: confirmer la ville (code de la story à la une)
-    country: "", // TODO Ben: confirmer
+    id: "marbella",
+    name: "Marbella",
+    country: "Spain",
     year: "2024",
-    todo: "ville et pays",
     cover: "MRB-04",
     coverFocus: "50% 62%",
-    // Left out: MRB-03 and MRB-05 (people at close range).
-    photos: ["MRB-06", "MRB-01", "MRB-02"],
+    photos: ["MRB-06", "MRB-01", "MRB-02", "MRB-05", "MRB-03"],
     alts: {
       "MRB-04": "The bow of a jet ski on open sea",
       "MRB-06": "A shoreline at dusk",
       "MRB-01": "A beach restaurant under a reed roof",
       "MRB-02": "A fringed parasol over a table facing the sea",
+      "MRB-05": "A restaurant at night under woven lanterns",
+      "MRB-03": "A packed club, people dancing under red lights",
     },
   },
   {
     id: "ski",
-    name: "Ski", // TODO Ben: confirmer la station et l'année
+    name: "Ski",
     country: "",
-    year: "", // TODO Ben: confirmer
-    todo: "station et année",
+    year: "",
     cover: "SKI-01",
     coverFocus: "50% 70%",
     photos: ["SKI-02"],
@@ -150,23 +153,63 @@ export const cities: City[] = [
     },
   },
   {
-    // CLOUD is a mix (concerts, Paris, Milan, Lausanne…): only concert and club frames
-    // are shown, as one "Nights" band. Left out: CLOUD-06 and CLOUD-10 (performers'
-    // faces), and the whole LOVE folder (faces).
-    id: "nights",
-    name: "Nights",
-    country: "Concerts & clubs",
-    year: "", // TODO Ben: confirmer les années
-    todo: "années",
+    // CLOUD and LOVE are Ben's own story highlights, mixes rather than places
+    // (concerts, Paris, Milan, Lausanne…): each gets its band, under its own name.
+    id: "cloud",
+    name: "Cloud",
+    country: "",
+    year: "",
     cover: "CLOUD-01",
     coverFocus: "50% 55%",
-    photos: ["CLOUD-03", "CLOUD-04", "CLOUD-11", "CLOUD-02"],
+    photos: [
+      "CLOUD-02",
+      "CLOUD-03",
+      "CLOUD-04",
+      "CLOUD-05",
+      "CLOUD-06",
+      "CLOUD-07",
+      "CLOUD-08",
+      "CLOUD-09",
+      "CLOUD-10",
+      "CLOUD-11",
+      "CLOUD-12",
+      "CLOUD-13",
+      "CLOUD-14",
+      "CLOUD-15",
+    ],
     alts: {
       "CLOUD-01": "A pianist on stage under a fan of light beams",
       "CLOUD-03": "A concert hall under a rectangle of blue neon",
       "CLOUD-04": "A club crowd seen from the back",
       "CLOUD-11": "Soap bubbles and light beams in the trees",
       "CLOUD-02": "A saxophonist in silhouette inside a beam of light",
+      "CLOUD-05": "The glass roof of the Galleria Vittorio Emanuele II in Milan",
+      "CLOUD-06": "A cloud-shaped light sculpture above a DJ booth",
+      "CLOUD-07": "A café bar under a green and white striped awning",
+      "CLOUD-08": "The Arc de Triomphe seen from below",
+      "CLOUD-09": "An Ariane rocket standing next to an Air France aeroplane",
+      "CLOUD-10": "A DJ in blue light, arms raised in the crowd",
+      "CLOUD-12": "The Eiffel Tower seen from a set table on a terrace",
+      "CLOUD-13": "A sky of red and orange clouds at sunset",
+      "CLOUD-14": "Snow-capped mountains across a lake in the evening light",
+      "CLOUD-15": "A sports field lit by floodlights in the rain",
+    },
+  },
+  {
+    id: "love",
+    name: "Love",
+    country: "",
+    year: "",
+    cover: "LOVE-01",
+    coverFocus: "50% 60%",
+    photos: ["LOVE-02", "LOVE-03", "LOVE-04", "LOVE-05", "LOVE-06"],
+    alts: {
+      "LOVE-01": "A lake at dusk, the last light reflected in the water",
+      "LOVE-02": "A campfire seen through the trees at nightfall",
+      "LOVE-03": "Two people on ladders building a wooden structure above a painted sign",
+      "LOVE-04": "A wooden caravan on a meadow under a cloudy sky",
+      "LOVE-05": "Four scouts arm in arm at a camp, in an old print",
+      "LOVE-06": "Dinner outdoors, a plate of pasta in the foreground",
     },
   },
 ];

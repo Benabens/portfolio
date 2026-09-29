@@ -70,11 +70,11 @@ export default function Work() {
                     <li key={t}>{t}</li>
                   ))}
                 </ul>
-                {study.link && (
-                  <a className="case-link" href={study.link.href} target="_blank" rel="noopener">
-                    {study.link.label} <Arrow />
+                {study.links?.map((link) => (
+                  <a className="case-link" href={link.href} target="_blank" rel="noopener" key={link.href}>
+                    {link.label} <Arrow />
                   </a>
-                )}
+                ))}
                 {study.note && <span className="case-note">{study.note}</span>}
               </div>
             </div>

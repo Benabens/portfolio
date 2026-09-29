@@ -1,7 +1,8 @@
 import type { CaseStudy, SideProject } from "./types";
 
-// Projects. Every figure comes from CV V5 (2026-09-25) or was measured in the
-// public repositories on 2026-09-26 (see the comments); nothing is invented.
+// Projects. Every figure comes from the CV (Brain/CV/CV.md, audit of 2026-09-29) or was
+// measured in the public repositories (see the comments); nothing is invented. The CV
+// is the source of truth: no count of code lines for Kairo and Cortex, no volume of listings.
 // To add a case study: append to `caseStudies` (keep the numbering).
 // To add a small project: append to `sideProjects`.
 
@@ -15,22 +16,24 @@ export const workIntro = {
 
 export const caseStudies: CaseStudy[] = [
   {
+    // Kairo and Trame were merged into one app (CV, 29 September 2026). No number of
+    // listings anywhere (Ben's decision): the point is the scoring, not the volume.
     id: "kairo",
     number: "01",
-    title: "Kairo & Trame",
-    titleParts: ["Kairo", "Trame"],
+    title: "Kairo",
     stack:
       "Next.js · TypeScript · Python · PostgreSQL (Supabase, row-level security) · Claude API · GitHub Actions · Vercel",
     summary:
-      "Kairo is an AI career CRM. Its daily pipeline aggregates internships, jobs and programmes, each scored 0–100 by rules + an LLM, with LLM extraction of deadlines and eligibility, each answer backed by a verbatim quote; ~37k lines, 160+ tests, CI, on Vercel. Trame, its networking module: a PWA turning freeform notes into structured contacts via Claude, linked to Kairo to show who I know at each employer.",
+      "Kairo is an AI career CRM. I designed and shipped a daily pipeline aggregating internships, jobs and programmes from 35 career boards, Indeed/LinkedIn (30 markets) and hackathon feeds, each scored 0–100 by rules + an LLM. LLM extraction of deadlines and eligibility, each answer backed by a verbatim quote; 160+ tests, CI, deployed on Vercel. A contact CRM turns freeform notes into structured contacts via Claude, then links each job to the people I know there and prompts who to follow up with.",
     metric: {
-      value: "16,000+",
-      count: { target: 16000, suffix: "+" },
+      value: "0–100",
+      count: { target: 100, prefix: "0–" },
       caption:
-        "internships, jobs and programmes aggregated daily from 35 career boards, Indeed and LinkedIn across 30 markets, and hackathon feeds.",
+        "the score every internship, job and programme gets, by rules + an LLM. Deadlines and eligibility come with a verbatim quote behind each answer.",
     },
     tags: ["AI career CRM", "live, behind login"],
-    note: "Private code · screens on request",
+    links: [{ label: "kairo-internships.vercel.app", href: "https://kairo-internships.vercel.app" }],
+    note: "Private code",
     media: [
       {
         kind: "video",
@@ -41,18 +44,7 @@ export const caseStudies: CaseStudy[] = [
         width: 1280,
         height: 720,
         alt: "Kairo landing page hero: a headline in French over a dark green scene where a ball rolls along a rail.",
-        caption:
-          "Kairo landing, hero mockup in progress (September 2026). The on-screen figures are demo copy; the app itself sits behind a login.",
-      },
-      {
-        kind: "image",
-        figure: "2",
-        src: "/work/kairo/trame-capture.png",
-        width: 1440,
-        height: 900,
-        alt: "Trame capture screen: a freeform note about a meeting, and the contact card proposed from it with its fields highlighted.",
-        caption:
-          "Trame, capture screen (design mockup, fictional contacts): a freeform note becomes a structured contact card.",
+        caption: "Kairo landing, hero mockup (September 2026). The app itself sits behind a login.",
       },
     ],
   },
@@ -62,18 +54,21 @@ export const caseStudies: CaseStudy[] = [
     title: "Cortex",
     stack: "Next.js · TypeScript · PostgreSQL · Drizzle · Claude API · LaTeX · Railway",
     summary:
-      "An AI exam-preparation platform. It learns each course's exam format from past papers, weights every topic by how heavily it was examined, schedules spaced revision on the student's weak points, and generates faithful practice exams via a multi-pass LLM pipeline. Per-user Postgres schemas, cost caps; deployed on Railway.",
+      "An AI exam-preparation platform. It learns each course's exam format from past papers, weights every topic by how heavily it was examined, schedules spaced revision on weak points, and generates faithful practice exams via a multi-pass LLM pipeline; I used it to prepare my own exams in 3 EPFL courses. Per-user Postgres schemas, cost caps; deployed on Railway.",
     metric: {
-      value: "~28k",
-      count: { target: 28, prefix: "~", suffix: "k" },
-      caption: "lines. Answers accepted only if verified by sandboxed code execution or symbolic checks.",
+      value: "330+",
+      count: { target: 330, suffix: "+" },
+      caption: "tests. Answers accepted only if verified by sandboxed code execution or symbolic checks.",
     },
     tags: ["exam generation", "open source"],
-    link: { label: "github.com/Benabens/cortex", href: "https://github.com/Benabens/cortex" },
+    links: [
+      { label: "cortex-exam.vercel.app", href: "https://cortex-exam.vercel.app" },
+      { label: "github.com/Benabens/cortex", href: "https://github.com/Benabens/cortex" },
+    ],
     media: [
       {
         kind: "video",
-        figure: "3",
+        figure: "2",
         src: "/work/cortex/landing.mp4",
         webm: "/work/cortex/landing.webm",
         poster: "/work/cortex/landing.jpg",
@@ -103,7 +98,7 @@ export const caseStudies: CaseStudy[] = [
         "connections in one weekday of the real CFF timetables, scanned in a single pass per query. ~258\u00a0MB of timetables for seven days, read from memory-mapped files.",
     },
     tags: ["journey planner", "open source"],
-    link: { label: "github.com/Benabens/ReCHor", href: "https://github.com/Benabens/ReCHor" },
+    links: [{ label: "github.com/Benabens/ReCHor", href: "https://github.com/Benabens/ReCHor" }],
     note: "Desktop app · screens coming",
   },
   {
@@ -122,7 +117,7 @@ export const caseStudies: CaseStudy[] = [
       caption: "lines of game code, in 24 actor classes and 4 areas, written on top of an unmodified course engine.",
     },
     tags: ["co-op game", "open source"],
-    link: { label: "github.com/Benabens/ICoop", href: "https://github.com/Benabens/ICoop" },
+    links: [{ label: "github.com/Benabens/ICoop", href: "https://github.com/Benabens/ICoop" }],
     note: "Two-player game · screens coming",
   },
   {
@@ -131,29 +126,27 @@ export const caseStudies: CaseStudy[] = [
     // MLP with sigmoid + MSE: 85.25 % accuracy, macro-F1 0.546, recall on "High" 0.00.
     // MLP with softmax + inverse-frequency weighted cross-entropy (w = [0.48, 1.21, 10.4]):
     // 84.50 %, 0.757, 0.69. Rare class = 44 of 1,280 training samples (~3 %). Team of 3 per
-    // the README and CV V5, which rounds the F1 jump to 0.55 → 0.76.
+    // the README and the CV, which rounds the F1 jump to 0.55 → 0.76. Both figures are
+    // measured on the test set (Ben's correction of 28 September 2026).
     id: "addiction",
     number: "05",
     title: "Gaming Addiction Prediction",
     stack: "Python · NumPy, no ML libraries · EPFL CS-233, team of 3",
     summary:
-      "Predicted gaming-addiction level (3 classes) and score (0–10) from gaming and mental-health data with KNN, logistic/linear regression, K-Means and an MLP with hand-written backpropagation, every gradient checked against finite differences; two written reports. The point is what accuracy hides: the first MLP scored 85% while never once predicting the rare class, 3% of the data. Inverse-frequency weighted cross-entropy lifted rarest-class recall from 0 to 0.69 and macro-F1 from 0.55 to 0.76 (5-fold CV), for 0.75 points of accuracy.",
+      "Predicted gaming-addiction level (3 classes) and score (0–10) from gaming and mental-health data with KNN, logistic/linear regression, K-Means and an MLP with hand-written backpropagation, every gradient checked against finite differences; two written reports. The point is what accuracy hides: the first MLP scored 85% while never once predicting the rare class, 3% of the data. Inverse-frequency weighted cross-entropy lifted rarest-class recall from 0 to 0.69 and macro-F1 from 0.55 to 0.76 (test set), for 0.75 points of accuracy.",
     metric: {
       value: "0 → 0.69",
       count: { target: 0.69, prefix: "0 → ", decimals: 2 },
       caption:
-        "rarest-class recall, lifted by an inverse-frequency weighted cross-entropy. Macro-\u2060F1 from 0.55 to 0.76 (5-fold CV).",
+        "rarest-class recall, lifted by an inverse-frequency weighted cross-entropy. Macro-\u2060F1 from 0.55 to 0.76 (test set).",
     },
     tags: ["ML from scratch", "open source"],
-    link: {
-      label: "github.com/Benabens/addiction-classifier-numpy",
-      href: "https://github.com/Benabens/addiction-classifier-numpy",
-    },
+    links: [{ label: "github.com/Benabens/addiction-classifier-numpy", href: "https://github.com/Benabens/addiction-classifier-numpy" }],
     media: [
       {
         // Counts read off Figure 2 (a) and (b) of reports/milestone2_report.pdf.
         kind: "matrix",
-        figure: "4",
+        figure: "3",
         classes: ["Low", "Medium", "High"],
         panels: [
           { title: "Before: sigmoid + MSE", rows: [[266, 14, 0], [32, 75, 0], [0, 13, 0]] },

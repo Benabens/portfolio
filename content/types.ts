@@ -28,7 +28,8 @@ export type CaseStudy = {
     caption: string;
   };
   tags: string[];
-  link?: ExternalLink;
+  /** Public proofs, in display order: the live site, the repository. */
+  links?: ExternalLink[];
   note?: string;
   /** Figures attached to the entry: a looping clip or a still, each with its caption. */
   media?: CaseMedia[];

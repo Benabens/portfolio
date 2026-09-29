@@ -1,6 +1,6 @@
 import type { JourneyStep } from "./types";
 
-// Journey, oldest first. Frozen from CV V5 (2026-09-25).
+// Journey, oldest first. Wording from the CV (Brain/CV/CV.md, audit of 2026-09-29).
 
 export const journeyIntro = {
   label: "Journey",
@@ -31,7 +31,7 @@ export const journey: JourneyStep[] = [
     number: "04",
     when: "2024 · 3 months",
     title: "NanoSynex",
-    text: "AI & automation, informal, for a Technion medtech spin-off, reporting to the CEO. Deployed two offline LLMs (Ollama; Mistral 7B, Llama 3 8B) behind a router with a shared Obsidian memory, so confidential R&D and investor documents never left the machine (GDPR); Python scripts triaging the CEO's Gmail and Outlook inboxes with an LLM classifier; the test reader's experiment exports harmonised into one analysis-ready dataset.",
+    text: "AI & automation (project-based) for a Technion spin-off, reporting to the CEO. Deployed two offline LLMs (Ollama; Mistral 7B, Llama 3 8B) behind a router with a shared Obsidian memory, so confidential R&D and investor documents never left the machine (GDPR); Python scripts triaging the CEO's Gmail and Outlook inboxes with an LLM classifier; the test reader's experiment exports harmonised and cleaned (Python, pandas), then matched against a partner veterinary lab's reference results to measure agreement rates for a validation study.",
   },
   {
     number: "05",

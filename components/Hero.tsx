@@ -59,7 +59,14 @@ export default function Hero() {
         {letters(profile.firstName)}
         {letters(profile.lastName)}
       </h1>
+      {/* Three areas. On a phone: statement, facts, then the portrait, which starts below
+          the fold so that the statement is the largest paint again. From 821px up:
+          portrait on the left, statement and facts beside it. */}
       <div className="hero-grid">
+        <p className="hero-statement">
+          {profile.statement}
+          <em>{profile.statementEmphasis}</em>
+        </p>
         <figure className="portrait">
           <span className="portrait-frame">
             <Image
@@ -68,26 +75,20 @@ export default function Hero() {
               width={profile.photo.width}
               height={profile.photo.height}
               sizes="(max-width: 820px) 92vw, 24rem"
-              priority
+              loading="eager"
             />
           </span>
           <span className="stamp">{profile.stamp}</span>
           <figcaption>{profile.photo.caption}</figcaption>
         </figure>
-        <div className="hero-side">
-          <p className="hero-statement">
-            {profile.statement}
-            <em>{profile.statementEmphasis}</em>
-          </p>
-          <ul className="meta" data-reveal="rows">
-            {profile.facts.map((f) => (
-              <li key={f.label}>
-                <span>{f.label}</span>
-                <b>{f.value}</b>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="meta" data-reveal="rows">
+          {profile.facts.map((f) => (
+            <li key={f.label}>
+              <span>{f.label}</span>
+              <b>{f.value}</b>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

@@ -13,12 +13,11 @@ export const profile = {
     "I build software end to end and ship it, I teach two first-year courses, and I take on things outside engineering ",
   statementEmphasis: "when they are worth doing.",
   stamp: "Open · Summer 2027 internship",
-  /** Replace /public/photo.jpg with a larger file (1,600 px wide or more) and update width/height. */
   photo: {
     src: "/photo.jpg",
     alt: "Portrait of Benjamin Abensur",
-    width: 720,
-    height: 720,
+    width: 1254,
+    height: 1254,
     caption: "Fig. 0 — Benjamin Abensur, Lausanne",
   },
   facts: [

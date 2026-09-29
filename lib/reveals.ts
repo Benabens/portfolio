@@ -63,7 +63,7 @@ export function setupReveals(scope: HTMLElement) {
   );
 }
 
-/** Count-up metrics: `<span data-count="16000" data-prefix="~" data-suffix="+">` */
+/** Count-up metrics: `<span data-count="330" data-prefix="~" data-suffix="+">` */
 export function setupCounters(scope: HTMLElement) {
   const q = gsap.utils.selector(scope);
   q<HTMLElement>("[data-count]").forEach((el) => {
