@@ -9,7 +9,7 @@ import { cities, photoIntro, photoMeta } from "@/content";
 import type { City } from "@/content";
 import Pic from "./Pic";
 
-const count = (n: number) => `${n} photo${n > 1 ? "s" : ""}`;
+const count = (n: number) => `${n}\u00a0photo${n > 1 ? "s" : ""}`;
 
 /** A city: its cover as a full-width band, the other photos in a row that opens under it. */
 function Band({ city }: { city: City }) {
@@ -82,7 +82,7 @@ function Band({ city }: { city: City }) {
                         alt={city.alts?.[stem] ?? `${city.name}, photo ${i + 2} of ${total}`}
                         sizes="(max-width: 700px) 60vw, 28rem"
                       />
-                      <span className="strip-n">No. {n}</span>
+                      <span className="strip-n">No.&nbsp;{n}</span>
                     </a>
                   </li>
                 );

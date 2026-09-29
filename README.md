@@ -20,10 +20,11 @@ Everything the site says lives in `content/*.ts`, typed by `content/types.ts`. C
 | --- | --- |
 | `content/site.ts` | name, description, links, navigation |
 | `content/profile.ts` | hero statement, stamp, facts, photo |
-| `content/projects.ts` | the five numbered case studies and the compact list |
+| `content/projects.ts` | the five numbered case studies, their figures (`media`) and the compact list |
 | `content/journey.ts` | the numbered timeline |
 | `content/music.ts` | tracks and their `src` (see `public/audio/README.md`) |
-| `content/photos.ts` | contact-sheet frames (see `public/photos/README.md`) |
+| `content/photos.ts` | the cities of the photo section: cover, photos, alt texts (see `public/photos/README.md`) |
+| `content/photos.generated.ts` | sizes and blur placeholders, written by `npm run photos`: do not edit |
 
 Every figure comes from the CV and holds up in an interview; nothing is invented. Placeholders (photos, unreleased masters) say so instead of pretending.
 
@@ -32,7 +33,9 @@ Every figure comes from the CV and holds up in an interview; nothing is invented
 - Preloader counter 0 → 100 that widens on Archivo's width axis, then a curved curtain hands over to the hero.
 - Hero name printed on the width axis (62 → 125), compressed again on scroll.
 - Scroll reveals (once), count-up metrics, custom cursor and magnetic buttons on fine pointers only.
-- `prefers-reduced-motion`: no preloader, no smooth scroll, no kinetic type, marquee scrolls by hand; the content is identical.
+- Figures under the case studies: 7 s muted loops (H.264 + WebM, `preload="none"`) that play only while on screen and can be paused.
+- Photo bands: the cover drifts a little against the scroll, the city name widens on the width axis, a band opens on the rest of its roll.
+- `prefers-reduced-motion`: no preloader, no smooth scroll, no kinetic type, no parallax, clips stay on their poster until asked; the content is identical.
 
 ## Run
 
@@ -41,6 +44,8 @@ npm install
 npm run dev      # http://localhost:3000
 npm run build && npm start
 npm run test:e2e   # hover/scroll regression checks against a running site (needs Chrome)
+npm run test:visuals   # portrait, figures and photo bands: node scripts/visuals.mjs <url> [captures-dir]
+npm run photos     # rebuild public/photos/ from the originals (see public/photos/README.md)
 ```
 
 ## Design exploration

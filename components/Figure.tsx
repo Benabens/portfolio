@@ -134,7 +134,7 @@ function ClipFigure({ media }: { media: Clip }) {
         </video>
       </div>
       <figcaption>
-        <span className="fig-n">Fig. {media.figure}</span>
+        <span className="fig-n">Fig.&nbsp;{media.figure}</span>
         <span className="fig-cap">{media.caption}</span>
         <button type="button" className="fig-ctl" onClick={toggle}>
           {playing ? "Pause" : "Play"}
@@ -167,7 +167,7 @@ export default function Figure({ media }: { media: CaseMedia }) {
             )}
           </div>
           <figcaption>
-            <span className="fig-n">Fig. {media.figure}</span>
+            <span className="fig-n">Fig.&nbsp;{media.figure}</span>
             <span className="fig-cap">{media.caption}</span>
           </figcaption>
         </>
