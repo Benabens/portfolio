@@ -60,8 +60,9 @@ export default function Hero() {
         {letters(profile.lastName)}
       </h1>
       {/* Three areas. On a phone: statement, facts, then the portrait, which starts below
-          the fold so that the statement is the largest paint again. From 821px up:
-          portrait on the left, statement and facts beside it. */}
+          the fold so that the statement is the largest paint again (the image is
+          lazy: it never competes with the fonts). From 821px up: portrait on the
+          left, statement and facts beside it. */}
       <div className="hero-grid">
         <p className="hero-statement">
           {profile.statement}
@@ -75,7 +76,6 @@ export default function Hero() {
               width={profile.photo.width}
               height={profile.photo.height}
               sizes="(max-width: 820px) 92vw, 24rem"
-              loading="eager"
             />
           </span>
           <span className="stamp">{profile.stamp}</span>

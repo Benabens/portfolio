@@ -34,7 +34,7 @@ Every figure comes from the CV and holds up in an interview; nothing is invented
 - Hero name printed on the width axis (62 → 125), compressed again on scroll.
 - Scroll reveals (once), count-up metrics, custom cursor and magnetic buttons on fine pointers only.
 - Figures under the case studies: 7 s muted loops (H.264 + WebM, `preload="none"`) that play only while on screen and can be paused.
-- Photo bands: the cover drifts a little against the scroll, the city name widens on the width axis, a band opens on the rest of its roll.
+- Photo bands (one per city or highlight): the cover drifts a little against the scroll, the city name widens on the width axis, a band opens on the rest of its roll.
 - `prefers-reduced-motion`: no preloader, no smooth scroll, no kinetic type, no parallax, clips stay on their poster until asked; the content is identical.
 
 ## Run

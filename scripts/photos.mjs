@@ -76,7 +76,8 @@ for (const city of cities) {
         bytes += out.size;
       }
     }
-    const blur = await base.clone().resize(24, 24, { fit: "inside" }).webp({ quality: 40 }).toBuffer();
+    // 16 px and heavily compressed: the placeholders travel with the page.
+    const blur = await base.clone().resize(16, 16, { fit: "inside" }).webp({ quality: 30 }).toBuffer();
     meta[stem] = { w, h, blur: `data:image/webp;base64,${blur.toString("base64")}` };
     if (stem === city.cover) {
       // The desktop band is wide (BAND:1) and full-bleed: crop it from the original at the
