@@ -63,6 +63,7 @@ for (const view of VIEWS) {
     await page.evaluate((y) => window.scrollTo(0, y), y);
     await sleep(1600);
   };
+  const first = `#city-${cities[0].id}`;
   const top = (sel, offset = 80) => page.evaluate((s, o) => Math.round(document.querySelector(s).getBoundingClientRect().top + scrollY - o), sel, offset);
 
   // ---- portrait ----
@@ -81,7 +82,7 @@ for (const view of VIEWS) {
     page.evaluate(() => [...document.querySelectorAll("video")].map((v) => ({ paused: v.paused, t: +v.currentTime.toFixed(2), ready: v.readyState })));
   let c = await clips();
   const fetched = await page.evaluate(() => performance.getEntriesByType("resource").filter((r) => /\.(mp4|webm)$/.test(r.name)).length);
-  check(`${view.key}: clips idle and not downloaded while off screen`, c.length === 2 && c.every((v) => v.paused && v.t === 0 && v.ready === 0) && fetched === 0, { clips: c, fetched });
+  check(`${view.key}: clips idle and not downloaded while off screen`, c.length >= 1 && c.every((v) => v.paused && v.t === 0 && v.ready === 0) && fetched === 0, { clips: c, fetched });
 
   await to(await top("#work", 60));
   await shot("work");
@@ -111,7 +112,7 @@ for (const view of VIEWS) {
   await to(await top("#case-cortex .figs", 120));
   await sleep(1800);
   c = await clips();
-  if (!view.reduced) check(`${view.key}: first clip paused after leaving, second playing`, c[0].paused && !c[1].paused, c);
+  if (!view.reduced) check(`${view.key}: the clip pauses once it has left the screen`, c[0].paused && (c.length < 2 || !c[1].paused), c);
   await shot("fig-cortex");
 
   await to(await top("#case-addiction .figs", 120));
@@ -133,7 +134,7 @@ for (const view of VIEWS) {
     covers: [...document.querySelectorAll(".city-img img")].slice(0, 2).map((i) => i.currentSrc.split("/").pop()),
   }));
   check(`${view.key}: one band per listed city, rows not mounted before opening`, before.bands === cities.length && before.rowImgs === 0, { ...before, expected: cities.length });
-  await to(await top("#city-montreal", 70));
+  await to(await top(first, 70));
   await shot("band");
   const press = async (sel) => {
     const r = await page.evaluate((s) => {
@@ -143,10 +144,11 @@ for (const view of VIEWS) {
     if (view.viewport.hasTouch) await page.touchscreen.tap(r.x, r.y);
     else await page.mouse.click(r.x, r.y);
   };
-  await press("#city-montreal .city-cover");
+  await press(`${first} .city-cover`);
   await sleep(1800);
+  await page.evaluate((f) => (window.__first = f), first);
   const open = await page.evaluate(() => {
-    const li = document.querySelector("#city-montreal");
+    const li = document.querySelector(window.__first);
     const row = li.querySelector(".city-row").getBoundingClientRect();
     const imgs = [...li.querySelectorAll(".strip img")];
     return {
@@ -160,10 +162,48 @@ for (const view of VIEWS) {
   });
   check(`${view.key}: a band opens on its row`, open.expanded === "true" && open.rowHeight > 100 && open.photos === open.announced - 1, open);
   await shot("band-open");
-  await press("#city-montreal .city-cover");
+
+  // ---- the viewer ----
+  await press(`${first} .strip li:nth-child(2) a`);
+  // The large version is fetched on open: wait for it (up to 6 s) rather than guessing a delay.
+  await page.waitForFunction(() => {
+    const img = document.querySelector(".lb .lb-full img");
+    return !!img && img.complete && img.naturalWidth > 0;
+  }, { timeout: 6000 }).catch(() => {});
+  await sleep(700);
+  const lb = await page.evaluate(() => {
+    const d = document.querySelector(".lb");
+    const img = d.querySelector(".lb-full img");
+    return {
+      open: d.open,
+      count: d.querySelector(".lb-count").textContent.replace(/\s+/g, " ").trim(),
+      // Loaded, and it is a full-size variant (1200 on phones, 2400 on desktops), not the band crop.
+      loaded: !!img && img.complete && img.naturalWidth > 0 && /-(1200|2400)\.(avif|jpg)$/.test(img.currentSrc),
+      natural: img?.naturalWidth,
+      src: img?.currentSrc.split("/").pop(),
+      focusInside: d.contains(document.activeElement),
+      paused: document.documentElement.classList.contains("lb-open"),
+      lenisStopped: document.documentElement.classList.contains("lenis-stopped"),
+    };
+  });
+  check(`${view.key}: the viewer opens on the clicked photo, large version loaded, focus inside, page paused`, lb.open && lb.count.startsWith("No. 03") && lb.loaded && lb.focusInside && lb.paused && (view.reduced || lb.lenisStopped), lb);
+  await shot("viewer");
+  await page.keyboard.press("ArrowRight");
+  await sleep(900);
+  const next = await page.evaluate(() => document.querySelector(".lb-count").textContent.replace(/\s+/g, " ").trim());
+  check(`${view.key}: arrow key moves to the next photo`, next.startsWith("No. 04"), { next });
+  await page.keyboard.press("Escape");
+  await sleep(900);
+  const closed = await page.evaluate(() => ({
+    open: document.querySelector(".lb").open,
+    paused: document.documentElement.classList.contains("lb-open"),
+    focus: document.activeElement?.closest(".strip li")?.dataset.stem ?? document.activeElement?.tagName,
+  }));
+  check(`${view.key}: Escape closes it and gives focus back to the row`, !closed.open && !closed.paused && closed.focus && closed.focus !== "BODY", closed);
+  await press(`${first} .city-cover`);
   await sleep(1200);
-  const closed = await page.evaluate(() => Math.round(document.querySelector("#city-montreal .city-row").getBoundingClientRect().height));
-  check(`${view.key}: and closes again`, closed === 0, { closed });
+  const shut = await page.evaluate((f) => Math.round(document.querySelector(`${f} .city-row`).getBoundingClientRect().height), first);
+  check(`${view.key}: and closes again`, shut === 0, { shut });
 
   // ---- whole page ----
   await to(await page.evaluate(() => document.documentElement.scrollHeight));

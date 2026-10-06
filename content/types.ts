@@ -39,6 +39,8 @@ export type CaseStudy = {
 type MediaBase = {
   /** Figure number printed in the caption ("1", "2"…). */
   figure: string;
+  /** true: the figure takes the whole row (a dense screen that needs the width); the others share rows. */
+  wide?: boolean;
   alt: string;
   caption: string;
 };

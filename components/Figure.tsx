@@ -158,7 +158,7 @@ function ClipFigure({ media }: { media: Clip }) {
 /** An exhibit attached to a case study: thin frame, figure number, serif caption. */
 export default function Figure({ media }: { media: CaseMedia }) {
   return (
-    <figure className="fig" data-reveal="fade">
+    <figure className={media.wide ? "fig fig-wide" : "fig"} data-reveal="fade">
       {media.kind === "video" ? (
         <ClipFigure media={media} />
       ) : (

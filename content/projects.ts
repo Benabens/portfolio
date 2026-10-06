@@ -67,15 +67,34 @@ export const caseStudies: CaseStudy[] = [
     ],
     media: [
       {
-        kind: "video",
+        // Captures of the app itself, run locally (Next.js, SQLite) on a copy of its
+        // development data, course CS-250 Algorithms: what fell at past finals and how often.
+        kind: "image",
         figure: "2",
-        src: "/work/cortex/landing.mp4",
-        webm: "/work/cortex/landing.webm",
-        poster: "/work/cortex/landing.jpg",
-        width: 1280,
-        height: 720,
-        alt: "Cortex landing page hero: the headline over a slowly moving network of light points on black.",
-        caption: "Cortex landing, hero draft of July 2026. The background loop is a generated video; the copy is a working draft.",
+        wide: true,
+        src: "/work/cortex/programme.webp",
+        width: 2000,
+        height: 1125,
+        alt: "Cortex, Programme page of the Algorithms course: notions grouped by chapter, each with how many times it fell at a final.",
+        caption: "Cortex, the programme of CS-250 Algorithms: every notion with how many times it fell at a final, sorted by priority.",
+      },
+      {
+        kind: "image",
+        figure: "3",
+        src: "/work/cortex/home.webp",
+        width: 2000,
+        height: 1250,
+        alt: "Cortex home: the notion to work on today, Max-flow / min-cut, worth 14.5% of the exam and never practised, with a Train button.",
+        caption: "The home screen: the notion that pays off most today, weighted by the exam, and the reviews that are due.",
+      },
+      {
+        kind: "image",
+        figure: "4",
+        src: "/work/cortex/exams.webp",
+        width: 2000,
+        height: 1250,
+        alt: "Cortex, Exams page: the exam composer with a proposed composition of 3 multiple-choice and 4 open problems, and the detected format of the real final: 180 minutes, 100 points.",
+        caption: "The exam composer: the real final's format, detected from the past papers, becomes the default composition.",
       },
     ],
   },
@@ -99,7 +118,28 @@ export const caseStudies: CaseStudy[] = [
     },
     tags: ["journey planner", "open source"],
     links: [{ label: "github.com/Benabens/ReCHor", href: "https://github.com/Benabens/ReCHor" }],
-    note: "Desktop app · screens coming",
+    media: [
+      {
+        // Rendered off screen from the repo (JavaFX 21 under Monocle, scene 1440×900 at 2×):
+        // Lausanne → Zürich HB on 28 May 2025 at 08:00, every Pareto-optimal journey.
+        kind: "image",
+        figure: "5",
+        src: "/work/rechor/journeys.webp",
+        width: 2000,
+        height: 1250,
+        alt: "ReCHor: the query fields filled with Lausanne, Zürich HB, 28.05.2025 and 08:00, and the list of journeys with their times, changes and durations.",
+        caption: "ReCHor, Lausanne → Zürich HB on 28 May 2025: every Pareto-optimal journey of the morning, rendered from the app.",
+      },
+      {
+        kind: "image",
+        figure: "6",
+        src: "/work/rechor/detail.webp",
+        width: 2000,
+        height: 1250,
+        alt: "ReCHor: the 8h17 IC 1 journey selected, with its intermediate stops Fribourg and Bern and the arrival at Zürich HB platform 33.",
+        caption: "The 8h17 IC 1 selected: platforms, intermediate stops and the iCalendar and map actions.",
+      },
+    ],
   },
   {
     // Measured in github.com/Benabens/ICoop on 2026-09-26: iccoop/src/main/java holds 40 files and
@@ -118,7 +158,37 @@ export const caseStudies: CaseStudy[] = [
     },
     tags: ["co-op game", "open source"],
     links: [{ label: "github.com/Benabens/ICoop", href: "https://github.com/Benabens/ICoop" }],
-    note: "Two-player game · screens coming",
+    media: [
+      {
+        // Frames rendered off screen from the repo: the engine drawn into a BufferedImage
+        // at 2×, the players walked by a scripted keyboard.
+        kind: "image",
+        figure: "7",
+        src: "/work/icoop/spawn.webp",
+        width: 1920,
+        height: 1080,
+        alt: "ICoop, the Spawn area: the fire player and the water player below a manor, with a heart, a bomb and a pressure plate.",
+        caption: "ICoop, the Spawn area: the fire and water players, a bomb to push and a pressure plate.",
+      },
+      {
+        kind: "image",
+        figure: "8",
+        src: "/work/icoop/orbway.webp",
+        width: 1920,
+        height: 1080,
+        alt: "ICoop, the OrbWay area: two corridors with hearts and pressure plates, a fire wall and a water wall, one player in each corridor.",
+        caption: "OrbWay: each player clears the wall the other cannot cross.",
+      },
+      {
+        kind: "image",
+        figure: "9",
+        src: "/work/icoop/maze.webp",
+        width: 1920,
+        height: 1080,
+        alt: "ICoop, the Maze: two columns of flaming skulls with health bars, streams of lava and water, both players attacking between them.",
+        caption: "The Maze: the HellSkull gauntlet, lava and water streams, both players mid-swing.",
+      },
+    ],
   },
   {
     // Figures from the README and the milestone-2 report of
@@ -146,7 +216,7 @@ export const caseStudies: CaseStudy[] = [
       {
         // Counts read off Figure 2 (a) and (b) of reports/milestone2_report.pdf.
         kind: "matrix",
-        figure: "3",
+        figure: "10",
         classes: ["Low", "Medium", "High"],
         panels: [
           { title: "Before: sigmoid + MSE", rows: [[266, 14, 0], [32, 75, 0], [0, 13, 0]] },
