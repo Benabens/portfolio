@@ -133,6 +133,7 @@ h2 em{font-style:normal;color:var(--red)}
 /* ---------- figures: exhibits attached to an entry ---------- */
 .figs{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:clamp(1.25rem,2.5vw,2rem);margin-top:.5rem;min-width:0}
 .fig{flex:1 1 20rem;max-width:46rem;min-width:0}
+.fig-wide{flex-basis:100%;max-width:none}
 .fig-frame{border:1.5px solid var(--ink);padding:.5rem;background:var(--bg)}
 .fig-media{display:block;width:100%;height:auto;background:var(--ink)}
 .fig-clip{position:relative;background:var(--ink)}
@@ -226,6 +227,33 @@ h2 em{font-style:normal;color:var(--red)}
 .strip img{object-fit:cover}
 .strip-n{position:absolute;left:0;top:0;font-family:var(--display);font-weight:500;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--ink);padding:.25rem .5rem}
 @media (min-width:700px){.city-cover{aspect-ratio:5/2;min-height:20rem;max-height:80vh}}
+
+/* ---------- photo viewer: ink, two rules, the photo ---------- */
+html.lb-open{overflow:hidden}
+.lb{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:#fff;overflow:hidden;font-family:var(--display)}
+.lb:not([open]){display:none}
+/* Two rules and the photo between them: the stage takes whatever the bars leave, however long the caption. */
+.lb[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.lb::backdrop{background:transparent}
+.lb-veil{position:absolute;inset:0;background:var(--ink)}
+.lb-bar{position:relative;margin:0 var(--gutter);display:flex;justify-content:space-between;align-items:baseline;gap:.5rem 1.5rem;font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
+.lb-top{padding:1.15rem 0 .8rem;border-bottom:1px solid rgba(255,255,255,.24)}
+.lb-bottom{padding:.7rem 0 max(.9rem,env(safe-area-inset-bottom));border-top:1px solid rgba(255,255,255,.24);align-items:center;flex-wrap:wrap}
+.lb-count{font-variant-numeric:tabular-nums;color:rgba(255,255,255,.72);white-space:nowrap}
+.lb-cap{font-family:var(--font-source-serif-italic),var(--font-source-serif),Georgia,serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;font-size:.95rem;line-height:1.4;color:rgba(255,255,255,.74);max-width:48ch;margin:0}
+.lb-ctl{display:flex;gap:.1rem;margin-left:auto}
+.lb-ctl button{font:inherit;color:#fff;padding:.8rem .4rem;letter-spacing:.1em;text-transform:uppercase;font-size:.78rem;font-weight:500;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.lb-ctl button::before{content:"[ ";color:rgba(255,255,255,.45)}
+.lb-ctl button::after{content:" ]";color:rgba(255,255,255,.45)}
+.lb-ctl button:hover{text-decoration:underline;text-underline-offset:.3em}
+.lb :focus-visible{outline:2px solid #fff;outline-offset:3px}
+.lb-stage{position:relative;min-height:0;margin:.7rem 0;touch-action:pan-y}
+.lb-ghost,.lb-full{position:absolute;inset:0;margin:auto;display:block}
+.lb-ghost{object-fit:contain;transform-origin:0 0;will-change:transform;opacity:0}
+.lb-full{opacity:0}
+.lb-full picture,.lb-full img{display:block;width:100%;height:100%;object-fit:contain}
+.lb-preload{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+@media (max-width:700px){.lb-stage{margin:.5rem 0}.lb-cap{flex:1 1 100%;max-width:none}.lb-ctl{margin-left:0}}
 
 /* ---------- music: the transport ---------- */
 .music{background:var(--paper-2);border-top:1px solid var(--line-strong)}

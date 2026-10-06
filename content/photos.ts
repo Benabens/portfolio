@@ -2,7 +2,8 @@ import type { City } from "./types";
 
 // Photo section: one band per city, the cover first, then the rest of the roll.
 // All the photos of ~/Pictures/Portfolio are listed (Ben's decision, 30 September
-// 2026), a band can be switched off with `hidden: true`; only the covers are chosen without an identifiable face in the
+// 2026), a band can be switched off with `hidden: true` (since 6 October only Mexico is
+// on, as a reference for the feature); only the covers are chosen without an identifiable face in the
 // foreground. A photo is referenced by its source stem "<CODE>-NN" from
 // ~/Pictures/Portfolio/<CODE>/ (originals, not in the repo).
 // Web versions: `npm run photos` (scripts/photos.mjs) writes public/photos/<id>/
@@ -18,6 +19,7 @@ export const photoIntro = {
 const bands: City[] = [
   {
     id: "montreal",
+    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Montréal",
     country: "Canada",
     year: "2026",
@@ -34,7 +36,7 @@ const bands: City[] = [
   },
   {
     id: "tel-aviv",
-    hidden: true, // Off for now (Ben, 30 September 2026): delete this line to bring the band back, then `npm run photos`.
+    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Tel Aviv",
     country: "Israel",
     year: "", // TODO Ben: confirmer l'année
@@ -55,6 +57,7 @@ const bands: City[] = [
   },
   {
     id: "ibiza",
+    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Ibiza",
     country: "Spain",
     year: "2024 – 2025",
@@ -95,6 +98,7 @@ const bands: City[] = [
   },
   {
     id: "mykonos",
+    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Mykonos",
     country: "Greece",
     year: "2025",
@@ -110,6 +114,7 @@ const bands: City[] = [
   },
   {
     id: "tarifa-tangier",
+    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Tarifa – Tangier",
     country: "Spain – Morocco",
     year: "2025",
@@ -125,6 +130,7 @@ const bands: City[] = [
   },
   {
     id: "marbella",
+    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Marbella",
     country: "Spain",
     year: "2024",
@@ -142,6 +148,7 @@ const bands: City[] = [
   },
   {
     id: "ski",
+    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Ski",
     country: "",
     year: "",
@@ -157,6 +164,7 @@ const bands: City[] = [
     // CLOUD and LOVE are Ben's own story highlights, mixes rather than places
     // (concerts, Paris, Milan, Lausanne…): each gets its band, under its own name.
     id: "cloud",
+    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Cloud",
     country: "",
     year: "",
@@ -198,6 +206,7 @@ const bands: City[] = [
   },
   {
     id: "love",
+    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Love",
     country: "",
     year: "",

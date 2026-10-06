@@ -11,6 +11,9 @@ type Props = {
   className?: string;
   /** Also offer the wide cover crop ("<stem>-band") from 700px up. */
   band?: boolean;
+  /** Load now rather than when near the viewport (the viewer and its preloads). */
+  eager?: boolean;
+  onLoad?: () => void;
   style?: CSSProperties;
 };
 
@@ -27,7 +30,7 @@ const srcSet = (base: string, ext: string, small: number, large: number) =>
  * A photo from the pipeline (scripts/photos.mjs): AVIF, then JPEG,
  * lazy, with reserved dimensions and the blurred placeholder behind it.
  */
-export default function Pic({ city, stem, alt, sizes, className, band, style }: Props) {
+export default function Pic({ city, stem, alt, sizes, className, band, eager, onLoad, style }: Props) {
   const meta = photoMeta[stem];
   if (!meta) return null;
   const base = `/photos/${city}/${stem}`;
@@ -56,8 +59,9 @@ export default function Pic({ city, stem, alt, sizes, className, band, style }: 
         alt={alt}
         width={meta.w}
         height={meta.h}
-        loading="lazy"
+        loading={eager ? "eager" : "lazy"}
         decoding="async"
+        onLoad={onLoad}
         style={{ backgroundImage: `url(${meta.blur})`, backgroundSize: "cover", backgroundPosition: "center", ...style }}
       />
     </picture>

@@ -8,6 +8,7 @@ import { useSectionMotion } from "@/lib/useSectionMotion";
 import { photoMeta } from "@/content/photos.generated";
 import type { City } from "@/content";
 import Pic from "./Pic";
+import Lightbox, { type Slide } from "./Lightbox";
 
 const count = (n: number) => `${n}\u00a0photo${n > 1 ? "s" : ""}`;
 
@@ -16,7 +17,14 @@ function Band({ city }: { city: City }) {
   // The row's photos are only mounted on first opening: nothing to download before.
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
+  const [view, setView] = useState<number | null>(null);
+  const root = useRef<HTMLLIElement>(null);
   const total = city.photos.length + 1;
+  const altOf = (stem: string, i: number) => city.alts?.[stem] ?? `${city.name}, photo ${i + 1} of ${total}`;
+  const slides: Slide[] = [city.cover, ...city.photos].map((stem, i) => ({ city: city.id, cityName: city.name, stem, alt: altOf(stem, i) }));
+  // The thumbnail a slide grows from: the band for the cover, the frame in the row otherwise.
+  const origin = (i: number) =>
+    root.current?.querySelector<HTMLImageElement>(i === 0 ? ".city-img img" : `.strip li[data-stem="${slides[i]?.stem}"] img`) ?? null;
   const where = [city.country !== city.name ? city.country : "", city.year].filter(Boolean).join(" · ");
 
   const toggle = () => {
@@ -27,7 +35,7 @@ function Band({ city }: { city: City }) {
   };
 
   return (
-    <li className={`city${open ? " is-open" : ""}${city.coverTone === "light" ? " is-light" : ""}`} id={`city-${city.id}`}>
+    <li className={`city${open ? " is-open" : ""}${city.coverTone === "light" ? " is-light" : ""}`} id={`city-${city.id}`} ref={root}>
       <h3 className="city-head">
         <button
           type="button"
@@ -68,20 +76,18 @@ function Band({ city }: { city: City }) {
                 if (!meta) return null;
                 const n = String(i + 2).padStart(2, "0");
                 return (
-                  <li key={stem} style={{ "--r": (meta.w / meta.h).toFixed(4) } as CSSProperties}>
+                  <li key={stem} data-stem={stem} style={{ "--r": (meta.w / meta.h).toFixed(4) } as CSSProperties}>
+                    {/* The link is the no-script fallback: with script, it opens the viewer in place. */}
                     <a
                       href={`/photos/${city.id}/${stem}-2400.jpg`}
-                      target="_blank"
-                      rel="noopener"
                       data-cursor="view"
                       tabIndex={open ? undefined : -1}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setView(i + 1);
+                      }}
                     >
-                      <Pic
-                        city={city.id}
-                        stem={stem}
-                        alt={city.alts?.[stem] ?? `${city.name}, photo ${i + 2} of ${total}`}
-                        sizes="(max-width: 700px) 60vw, 28rem"
-                      />
+                      <Pic city={city.id} stem={stem} alt={altOf(stem, i + 1)} sizes="(max-width: 700px) 60vw, 28rem" />
                       <span className="strip-n">No.&nbsp;{n}</span>
                     </a>
                   </li>
@@ -91,6 +97,7 @@ function Band({ city }: { city: City }) {
           )}
         </div>
       </div>
+      <Lightbox slides={slides} index={view} origin={origin} onIndex={setView} onClose={() => setView(null)} />
     </li>
   );
 }
