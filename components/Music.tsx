@@ -5,7 +5,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { setupReveals } from "@/lib/reveals";
 import { useSectionMotion } from "@/lib/useSectionMotion";
 import { mmss } from "@/lib/format";
-import { musicIntro, tracks } from "@/content";
+import { featuredTrack as t, musicIntro } from "@/content";
 
 const PlayIcon = () => (
   <svg className="ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -19,18 +19,16 @@ const PauseIcon = () => (
 );
 
 /**
- * The transport. Reads `src` from content/music.ts; while a track has no file
- * it shows "[ preview coming ]" instead of pretending to play.
+ * One original production, played as an excerpt over its own waveform:
+ * the build-up on the left, the drop marked at its exact bar, click to seek.
  */
 export default function Music() {
   const scope = useRef<HTMLElement>(null);
   const audio = useRef<HTMLAudioElement>(null);
   const playBtn = useRef<HTMLButtonElement>(null);
-  const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [note, setNote] = useState("");
-  const track = tracks[index];
 
   useSectionMotion(scope, setupReveals);
   const { contextSafe } = useGSAP(() => {}, { scope });
@@ -39,56 +37,35 @@ export default function Music() {
     if (playBtn.current) gsap.fromTo(playBtn.current, { scale: 0.92 }, { scale: 1, duration: 0.6, ease: "expo.out" });
   });
 
-  const stop = () => {
-    audio.current?.pause();
-    setPlaying(false);
-  };
-
-  const toggle = async () => {
+  const play = async () => {
     const a = audio.current;
-    if (!track.src || !a) {
-      setNote(musicIntro.missingNote);
-      pulse();
-      return;
-    }
-    if (a.paused) {
-      try {
-        await a.play();
-        setPlaying(true);
-        setNote("");
-      } catch {
-        setNote(musicIntro.errorNote);
-      }
-    } else stop();
-  };
-
-  const select = (i: number) => {
-    if (i !== index) {
-      stop();
-      setIndex(i);
-      setTime(0);
-      setNote("");
-      // Let React swap the <audio src> before trying to play.
-      window.setTimeout(() => void toggleFor(i), 0);
-    } else void toggle();
-  };
-  const toggleFor = async (i: number) => {
-    const t = tracks[i];
-    const a = audio.current;
-    if (!t.src || !a) {
-      setNote(musicIntro.missingNote);
-      pulse();
-      return;
-    }
+    if (!a) return;
     try {
       await a.play();
       setPlaying(true);
+      setNote("");
     } catch {
       setNote(musicIntro.errorNote);
     }
   };
+  const toggle = () => {
+    pulse();
+    if (audio.current && !audio.current.paused) {
+      audio.current.pause();
+      setPlaying(false);
+    } else void play();
+  };
+  const seek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const a = audio.current;
+    if (!a) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    a.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * t.duration;
+    setTime(a.currentTime);
+    if (a.paused) void play();
+  };
 
-  const progress = track.src && audio.current?.duration ? (time / audio.current.duration) * 100 : 0;
+  const played = time / t.duration;
+  const dropPct = (t.dropAt / t.duration) * 100;
 
   return (
     <section className="section music" id="music" ref={scope} aria-labelledby="music-h">
@@ -99,65 +76,91 @@ export default function Music() {
           <em>{musicIntro.titleEmphasis}</em>
         </h2>
       </div>
-      <div className="transport" data-reveal="fade">
-        <button
-          className={playing ? "play is-playing" : "play"}
-          ref={playBtn}
-          onClick={() => void toggle()}
-          aria-label={playing ? "Pause" : `Play ${track.title}`}
-          data-magnetic
-          data-cursor="play"
-        >
-          <PlayIcon />
-          <PauseIcon />
-        </button>
-        <div>
-          <p className="now-lbl">{musicIntro.nowLabel}</p>
-          <p id="now-title">{track.title}</p>
-          <p className="now-sub">{track.subtitle}</p>
-          <div className="bar">
-            <div className="bar-track" aria-hidden="true">
-              <div className="bar-fill" style={{ width: `${progress}%` }} />
-            </div>
-            <div className="bar-times">
-              <span>{mmss(time)}</span>
-              <span>{mmss(track.duration)}</span>
-            </div>
+
+      <div className="feat" data-reveal="fade">
+        <div className="feat-head">
+          <button
+            className={playing ? "play is-playing" : "play"}
+            ref={playBtn}
+            onClick={toggle}
+            aria-label={playing ? "Pause" : `Play an excerpt of ${t.title}`}
+            data-magnetic
+            data-cursor="play"
+          >
+            <PlayIcon />
+            <PauseIcon />
+          </button>
+          <div className="feat-id">
+            <p className="now-lbl">{t.tag}</p>
+            <p className="feat-title">{t.title}</p>
+            <ul className="feat-facts">
+              {t.facts.map((f) => (
+                <li key={f}>{f}</li>
+              ))}
+            </ul>
           </div>
-          <p className="deck-note" aria-live="polite">
-            {note}
-          </p>
         </div>
+
+        <div className="wave-wrap">
+          <div
+            className="wave"
+            onClick={seek}
+            role="slider"
+            tabIndex={0}
+            aria-label="Position in the excerpt"
+            aria-valuemin={0}
+            aria-valuemax={t.duration}
+            aria-valuenow={Math.round(time)}
+            aria-valuetext={mmss(time)}
+            onKeyDown={(e) => {
+              const a = audio.current;
+              if (!a) return;
+              if (e.key === "ArrowRight") a.currentTime = Math.min(t.duration, a.currentTime + 4);
+              if (e.key === "ArrowLeft") a.currentTime = Math.max(0, a.currentTime - 4);
+              if (e.key === " " || e.key === "Enter") {
+                e.preventDefault();
+                toggle();
+              }
+            }}
+          >
+            {t.peaks.map((p, i) => (
+              <span
+                key={i}
+                className={(i + 0.5) / t.peaks.length <= played ? "w-bar is-played" : "w-bar"}
+                style={{ height: `${Math.max(6, p * 100)}%` }}
+              />
+            ))}
+            <span className="w-drop" style={{ left: `${dropPct}%` }} aria-hidden="true">
+              <span>Drop</span>
+            </span>
+          </div>
+          <div className="wave-legend">
+            <span>Build-up</span>
+            <span className="tab">
+              {mmss(time)} / {mmss(t.duration)}
+            </span>
+          </div>
+        </div>
+
+        <p className="feat-note">{t.excerptNote}</p>
+        <p className="deck-note" aria-live="polite">
+          {note}
+        </p>
       </div>
-      <ol className="tracks">
-        {tracks.map((t, i) => (
-          <li className={i === index ? "track is-active" : "track"} key={t.id}>
-            <button onClick={() => select(i)}>
-              <span className="tr-n">{t.number}</span>
-              <span>
-                <span className="tr-t">{t.title}</span>
-                <span className="tr-s">{t.subtitle}</span>
-              </span>
-              <span className="tr-d">{mmss(t.duration)}</span>
-            </button>
-          </li>
-        ))}
-      </ol>
+
       <p className="deck-ctx">{musicIntro.context}</p>
       <audio
         ref={audio}
-        preload="none"
-        src={track.src ?? undefined}
+        preload="metadata"
+        src={t.src}
         onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
         onEnded={() => {
           setPlaying(false);
           setTime(0);
         }}
         onError={() => {
-          if (track.src) {
-            setNote(musicIntro.errorNote);
-            setPlaying(false);
-          }
+          setNote(musicIntro.errorNote);
+          setPlaying(false);
         }}
       />
     </section>
