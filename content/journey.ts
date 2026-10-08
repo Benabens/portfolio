@@ -37,7 +37,7 @@ export const journey: JourneyStep[] = [
     number: "05",
     when: "2025",
     title: "BABOO, three club nights",
-    text: "Founder & event producer. Produced 3 club nights end to end; one night at Noche Club (May 2025) brought in CHF\u00a05,000 with an internationally touring DJ.",
+    text: "Founder & event producer. Produced 3 club nights end to end; one night (May 2025) brought in CHF\u00a05,000 with an internationally touring DJ.",
   },
   {
     number: "06",
