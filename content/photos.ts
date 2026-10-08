@@ -6,6 +6,8 @@ import type { City } from "./types";
 // on, as a reference for the feature); only the covers are chosen without an identifiable face in the
 // foreground. A photo is referenced by its source stem "<CODE>-NN" from
 // ~/Pictures/Portfolio/<CODE>/ (originals, not in the repo).
+// 8 October 2026: only the photos Ben kept after grading are listed; the version he
+// picked (Canon natural / cine / B&W, or the original) sits in ~/Pictures/Portfolio/_final/.
 // Web versions: `npm run photos` (scripts/photos.mjs) writes public/photos/<id>/
 // and content/photos.generated.ts. Re-run it once the originals are graded.
 
@@ -19,13 +21,12 @@ export const photoIntro = {
 const bands: City[] = [
   {
     id: "montreal",
-    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Montréal",
     country: "Canada",
     year: "2026",
     cover: "MTL-01",
     coverFocus: "50% 35%",
-    photos: ["MTL-02", "MTL-03", "MTL-04", "MTL-05"],
+    photos: ["MTL-02", "MTL-03"],
     alts: {
       "MTL-01": "Two office towers lit against a deep blue night sky",
       "MTL-02": "A downtown street between towers at dusk, street lamps on",
@@ -36,14 +37,14 @@ const bands: City[] = [
   },
   {
     id: "tel-aviv",
-    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
+    hidden: true, // Off (Ben, 6 October 2026): Tel Aviv stays off for now.
     name: "Tel Aviv",
     country: "Israel",
     year: "", // TODO Ben: confirmer l'année
     todo: "année",
     cover: "TLV-04",
     coverFocus: "50% 45%",
-    photos: ["TLV-08", "TLV-07", "TLV-06", "TLV-05", "TLV-02", "TLV-01", "TLV-03"],
+    photos: ["TLV-08", "TLV-07", "TLV-06", "TLV-05"],
     alts: {
       "TLV-04": "Palm trees and a street lamp against a stormy sunset over the sea",
       "TLV-08": "The sun going down behind clouds over the sea",
@@ -57,15 +58,13 @@ const bands: City[] = [
   },
   {
     id: "ibiza",
-    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Ibiza",
     country: "Spain",
     year: "2024 – 2025",
-    cover: "IBZ-01",
+    cover: "IBZ2-04",
     coverFocus: "50% 42%",
-    coverTone: "light",
     // IBZ and IBZ2 are the same island, two summers.
-    photos: ["IBZ-04", "IBZ-06", "IBZ-02", "IBZ-03", "IBZ-05", "IBZ2-01", "IBZ2-02", "IBZ2-03", "IBZ2-04"],
+    photos: [],
     alts: {
       "IBZ-01": "The Ibiza letters and two giant red cherries on a paved square",
       "IBZ-04": "A pool at dusk",
@@ -98,7 +97,6 @@ const bands: City[] = [
   },
   {
     id: "mykonos",
-    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Mykonos",
     country: "Greece",
     year: "2025",
@@ -114,13 +112,12 @@ const bands: City[] = [
   },
   {
     id: "tarifa-tangier",
-    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Tarifa – Tangier",
     country: "Spain – Morocco",
     year: "2025",
     cover: "TRF-TGR-04",
     coverFocus: "50% 55%",
-    photos: ["TRF-TGR-01", "TRF-TGR-02", "TRF-TGR-03"],
+    photos: ["TRF-TGR-01"],
     alts: {
       "TRF-TGR-04": "Two kites over the sea at sunset",
       "TRF-TGR-01": "Waves under an orange sky",
@@ -130,13 +127,12 @@ const bands: City[] = [
   },
   {
     id: "marbella",
-    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Marbella",
     country: "Spain",
     year: "2024",
-    cover: "MRB-04",
+    cover: "MRB-02",
     coverFocus: "50% 62%",
-    photos: ["MRB-06", "MRB-01", "MRB-02", "MRB-05", "MRB-03"],
+    photos: [],
     alts: {
       "MRB-04": "The bow of a jet ski on open sea",
       "MRB-06": "A shoreline at dusk",
@@ -148,7 +144,6 @@ const bands: City[] = [
   },
   {
     id: "ski",
-    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Ski",
     country: "",
     year: "",
@@ -164,28 +159,12 @@ const bands: City[] = [
     // CLOUD and LOVE are Ben's own story highlights, mixes rather than places
     // (concerts, Paris, Milan, Lausanne…): each gets its band, under its own name.
     id: "cloud",
-    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Cloud",
     country: "",
     year: "",
     cover: "CLOUD-01",
     coverFocus: "50% 55%",
-    photos: [
-      "CLOUD-02",
-      "CLOUD-03",
-      "CLOUD-04",
-      "CLOUD-05",
-      "CLOUD-06",
-      "CLOUD-07",
-      "CLOUD-08",
-      "CLOUD-09",
-      "CLOUD-10",
-      "CLOUD-11",
-      "CLOUD-12",
-      "CLOUD-13",
-      "CLOUD-14",
-      "CLOUD-15",
-    ],
+    photos: ["CLOUD-02", "CLOUD-03", "CLOUD-05", "CLOUD-06", "CLOUD-08", "CLOUD-09", "CLOUD-11", "CLOUD-12", "CLOUD-13", "CLOUD-15"],
     alts: {
       "CLOUD-01": "A pianist on stage under a fan of light beams",
       "CLOUD-03": "A concert hall under a rectangle of blue neon",
@@ -206,13 +185,12 @@ const bands: City[] = [
   },
   {
     id: "love",
-    hidden: true, // Off for now (Ben, 6 October 2026): only Mexico stays. Delete this line, then `npm run photos`.
     name: "Love",
     country: "",
     year: "",
     cover: "LOVE-01",
     coverFocus: "50% 60%",
-    photos: ["LOVE-02", "LOVE-03", "LOVE-04", "LOVE-05", "LOVE-06"],
+    photos: ["LOVE-05"],
     alts: {
       "LOVE-01": "A lake at dusk, the last light reflected in the water",
       "LOVE-02": "A campfire seen through the trees at nightfall",

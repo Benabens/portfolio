@@ -29,12 +29,15 @@ const FORMATS = {
 };
 
 const codeOf = (stem) => stem.replace(/-\d+$/, "");
+// The graded version Ben picked (SRC/_final/<CODE>/, written by the triage tool) wins
+// over the original in SRC/<CODE>/.
 async function sourceOf(stem) {
-  const dir = path.join(SRC, codeOf(stem));
-  const files = await readdir(dir).catch(() => []);
-  const hit = files.find((f) => f.startsWith(stem + "_"));
-  if (!hit) throw new Error(`No original for ${stem} in ${dir}`);
-  return path.join(dir, hit);
+  for (const dir of [path.join(SRC, "_final", codeOf(stem)), path.join(SRC, codeOf(stem))]) {
+    const files = await readdir(dir).catch(() => []);
+    const hit = files.find((f) => f.startsWith(stem + "_"));
+    if (hit) return path.join(dir, hit);
+  }
+  throw new Error(`No original for ${stem} in ${SRC}`);
 }
 const newer = async (a, b) => {
   try {
