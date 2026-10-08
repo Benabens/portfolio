@@ -90,15 +90,19 @@ export type JourneyStep = {
   now?: boolean;
 };
 
-export type Track = {
-  id: string;
-  number: string;
+export type FeaturedTrack = {
   title: string;
-  subtitle: string;
-  /** Duration in seconds (read from the WAV files). */
+  tag: string;
+  facts: string[];
+  excerptNote: string;
+  /** Path under /public. */
+  src: string;
+  /** Excerpt length in seconds. */
   duration: number;
-  /** Path under /public, e.g. "/audio/the-handoff-v2.mp3". Leave null until the master exists. */
-  src: string | null;
+  /** Where the drop lands in the excerpt, in seconds. */
+  dropAt: number;
+  /** Normalised loudness (0–1) of the excerpt in equal slices, drawn as the waveform. */
+  peaks: number[];
 };
 
 /** One band of the photo section: a city, its cover and up to six more photos. */
