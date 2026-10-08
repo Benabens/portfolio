@@ -281,7 +281,6 @@ html.lb-open{overflow:hidden}
 .wave-legend .tab{font-variant-numeric:tabular-nums}
 .feat-note{margin-top:1.4rem;color:var(--muted);max-width:52ch}
 .deck-note{font-family:var(--display);font-size:.85rem;margin-top:.6rem;min-height:1.4em;color:var(--red)}
-.deck-ctx{margin-top:1.5rem;color:var(--muted);max-width:44ch}
 @media (max-width:640px){.feat-head{grid-template-columns:1fr}}
 
 /* ---------- contact ---------- */

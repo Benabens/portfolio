@@ -11,7 +11,6 @@ export const musicIntro = {
   label: "Music",
   title: "Afro house, produced in Ableton. ",
   titleEmphasis: "I also DJ.",
-  context: "Played out at the BABOO nights in Lausanne, including Noche Club in May 2025.",
   errorNote: "[ the audio could not load — try again ]",
 };
 

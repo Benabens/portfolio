@@ -148,7 +148,6 @@ export default function Music() {
         </p>
       </div>
 
-      <p className="deck-ctx">{musicIntro.context}</p>
       <audio
         ref={audio}
         preload="metadata"
