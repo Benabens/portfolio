@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import { useSectionMotion } from "@/lib/useSectionMotion";
 import { setupCounters, setupReveals } from "@/lib/reveals";
+import { gsap } from "@/lib/gsap";
+import { prefersReducedMotion } from "@/lib/motion";
 import { caseStudies, workIntro } from "@/content";
 import type { CaseStudy } from "@/content";
 import Figure from "./Figure";
@@ -43,6 +45,27 @@ export default function Work() {
   useSectionMotion(scope, (el) => {
     setupReveals(el);
     setupCounters(el);
+    if (prefersReducedMotion()) return;
+    gsap.utils.toArray<HTMLElement>(".fig-frame", el).forEach((frame) => {
+      gsap.fromTo(
+        frame,
+        { clipPath: "inset(0% 0% 100% 0%)" },
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 1.3,
+          ease: "expo.out",
+          clearProps: "clipPath",
+          scrollTrigger: { trigger: frame, start: "top 88%", once: true },
+        },
+      );
+      const img = frame.querySelector<HTMLElement>(":scope > img.fig-media");
+      if (img)
+        gsap.fromTo(
+          img,
+          { scale: 1.06, yPercent: -2.5 },
+          { yPercent: 2.5, ease: "none", scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: true } },
+        );
+    });
   });
 
   return (
