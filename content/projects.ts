@@ -158,24 +158,16 @@ export const caseStudies: CaseStudy[] = [
         caption: "Genève → St. Moritz, 28 May 2025: the first journey after 07:00, found by ReCHor's own router on the real CFF timetable, replayed stop by stop.",
       },
       {
-        // Rendered off screen from the repo (JavaFX 21 under Monocle, scene 1440×900 at 2×):
-        // Lausanne → Zürich HB on 28 May 2025 at 08:00, every Pareto-optimal journey.
+        // Rendered off screen from the repo's own JavaFX UI (scene 1200×848 at 2×, intermediate
+        // stops opened): Genève → St. Moritz on 28 May 2025 at 07:30, the same query as the map.
         kind: "image",
         figure: "9",
-        src: "/work/rechor/journeys.webp",
+        wide: true,
+        src: "/work/rechor/stmoritz.webp",
         width: 2000,
-        height: 1250,
-        alt: "ReCHor: the query fields filled with Lausanne, Zürich HB, 28.05.2025 and 08:00, and the list of journeys with their times, changes and durations.",
-        caption: "ReCHor, Lausanne → Zürich HB on 28 May 2025: every Pareto-optimal journey of the morning, rendered from the app.",
-      },
-      {
-        kind: "image",
-        figure: "10",
-        src: "/work/rechor/detail.webp",
-        width: 2000,
-        height: 1250,
-        alt: "ReCHor: the 8h17 IC 1 journey selected, with its intermediate stops Fribourg and Bern and the arrival at Zürich HB platform 33.",
-        caption: "The 8h17 IC 1 selected: platforms, intermediate stops and the iCalendar and map actions.",
+        height: 1413,
+        alt: "ReCHor: Genève to St. Moritz on 28.05.2025 at 07:30; on the left the journeys of the day, on the right the 7h35 journey with its three trains, IC 1, IC 3 and IR 38, every intermediate stop and both changes.",
+        caption: "The app itself on the same query: the day's journeys on the left; on the right the 7h35, IC 1, IC 3 and IR 38 over the Albula line, every stop and both changes.",
       },
     ],
   },
@@ -201,7 +193,7 @@ export const caseStudies: CaseStudy[] = [
         // Frames rendered off screen from the repo: the engine drawn into a BufferedImage
         // at 2×, the players walked by a scripted keyboard.
         kind: "image",
-        figure: "11",
+        figure: "10",
         src: "/work/icoop/spawn.webp",
         width: 1920,
         height: 1080,
@@ -210,7 +202,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         kind: "image",
-        figure: "12",
+        figure: "11",
         src: "/work/icoop/orbway.webp",
         width: 1920,
         height: 1080,
@@ -219,7 +211,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         kind: "image",
-        figure: "13",
+        figure: "12",
         src: "/work/icoop/maze.webp",
         width: 1920,
         height: 1080,
@@ -254,7 +246,7 @@ export const caseStudies: CaseStudy[] = [
       {
         // Counts read off Figure 2 (a) and (b) of reports/milestone2_report.pdf.
         kind: "matrix",
-        figure: "14",
+        figure: "13",
         classes: ["Low", "Medium", "High"],
         panels: [
           { title: "Before: sigmoid + MSE", rows: [[266, 14, 0], [32, 75, 0], [0, 13, 0]] },
