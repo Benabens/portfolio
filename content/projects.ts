@@ -32,19 +32,38 @@ export const caseStudies: CaseStudy[] = [
         "the score every internship, job and programme gets, by rules + an LLM. Deadlines and eligibility come with a verbatim quote behind each answer.",
     },
     tags: ["AI career CRM", "live, behind login"],
-    links: [{ label: "kairo-internships.vercel.app", href: "https://kairo-internships.vercel.app" }],
+    links: [{ label: "kairocareer.app", href: "https://kairocareer.app" }],
     note: "Private code",
     media: [
       {
-        kind: "video",
+        // Landing captured headless at 1440×900 @2x from kairocareer.app (13 October 2026).
+        kind: "image",
         figure: "1",
-        src: "/work/kairo/landing.mp4",
-        webm: "/work/kairo/landing.webm",
-        poster: "/work/kairo/landing.jpg",
-        width: 1280,
-        height: 720,
-        alt: "Kairo landing page hero: a headline in French over a dark green scene where a ball rolls along a rail.",
-        caption: "Kairo landing, hero mockup (September 2026). The app itself sits behind a login.",
+        wide: true,
+        src: "/work/kairo/landing.webp",
+        width: 2000,
+        height: 1250,
+        alt: "Kairo landing page: the headline Le bon stage, au bon moment over a dark green scene where a metal ball rests on a rail.",
+        caption: "The landing, kairocareer.app: Kairo searches, sorts and applies; you prepare the interviews.",
+      },
+      {
+        // Inside the app (13 October 2026), from my own account; my name and the inbox total are hidden.
+        kind: "image",
+        figure: "2",
+        src: "/work/kairo/inbox.webp",
+        width: 2000,
+        height: 1020,
+        alt: "Kairo inbox: internships sorted by score, each with a one-line reason for its score, grouped into Excellent, Very good, Good bands.",
+        caption: "Inside the app, the inbox: every offer scored 0–100, with the reason for its score in one line.",
+      },
+      {
+        kind: "image",
+        figure: "3",
+        src: "/work/kairo/detail.webp",
+        width: 1880,
+        height: 956,
+        alt: "Kairo offer panel: Machine Learning Intern 2027 at Pinterest, Dublin, scored 92 out of 100, with why this score, the deadline, type, source and the actions Wishlist and Apply with the copilot.",
+        caption: "One offer opened: the score and why, the deadline, and the next step, add it to the Wishlist or apply with the copilot.",
       },
     ],
   },
@@ -62,15 +81,26 @@ export const caseStudies: CaseStudy[] = [
     },
     tags: ["exam generation", "open source"],
     links: [
-      { label: "cortex-exam.vercel.app", href: "https://cortex-exam.vercel.app" },
+      { label: "cortexexam.com", href: "https://cortexexam.com" },
       { label: "github.com/Benabens/cortex", href: "https://github.com/Benabens/cortex" },
     ],
     media: [
       {
+        // Landing captured headless at 1440×900 @2x from cortexexam.com (13 October 2026).
+        kind: "image",
+        figure: "4",
+        wide: true,
+        src: "/work/cortex/landing.webp",
+        width: 2000,
+        height: 1250,
+        alt: "Cortex landing page: the headline Know exactly what your exam will ask, over a dark dotted background, with a Try Cortex button and the app window rising from the bottom.",
+        caption: "The landing, cortexexam.com. Below, the app itself.",
+      },
+      {
         // Captures of the app itself, run locally (Next.js, SQLite) on a copy of its
         // development data, course CS-250 Algorithms: what fell at past finals and how often.
         kind: "image",
-        figure: "2",
+        figure: "5",
         wide: true,
         src: "/work/cortex/programme.webp",
         width: 2000,
@@ -80,7 +110,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         kind: "image",
-        figure: "3",
+        figure: "6",
         src: "/work/cortex/home.webp",
         width: 2000,
         height: 1250,
@@ -89,7 +119,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         kind: "image",
-        figure: "4",
+        figure: "7",
         src: "/work/cortex/exams.webp",
         width: 2000,
         height: 1250,
@@ -120,10 +150,18 @@ export const caseStudies: CaseStudy[] = [
     links: [{ label: "github.com/Benabens/ReCHor", href: "https://github.com/Benabens/ReCHor" }],
     media: [
       {
+        // A real query run on the app's own code (Router + JourneyExtractor, content/rechor-trip.ts).
+        kind: "journey",
+        figure: "8",
+        wide: true,
+        alt: "Animated map of Switzerland: the fastest morning journey from Genève to St. Moritz found by ReCHor, IC 1 to Zürich HB, IC 3 to Chur, IR 38 to St. Moritz, drawn stop by stop with its times.",
+        caption: "Genève → St. Moritz, 28 May 2025: the first journey after 07:00, found by ReCHor's own router on the real CFF timetable, replayed stop by stop.",
+      },
+      {
         // Rendered off screen from the repo (JavaFX 21 under Monocle, scene 1440×900 at 2×):
         // Lausanne → Zürich HB on 28 May 2025 at 08:00, every Pareto-optimal journey.
         kind: "image",
-        figure: "5",
+        figure: "9",
         src: "/work/rechor/journeys.webp",
         width: 2000,
         height: 1250,
@@ -132,7 +170,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         kind: "image",
-        figure: "6",
+        figure: "10",
         src: "/work/rechor/detail.webp",
         width: 2000,
         height: 1250,
@@ -163,7 +201,7 @@ export const caseStudies: CaseStudy[] = [
         // Frames rendered off screen from the repo: the engine drawn into a BufferedImage
         // at 2×, the players walked by a scripted keyboard.
         kind: "image",
-        figure: "7",
+        figure: "11",
         src: "/work/icoop/spawn.webp",
         width: 1920,
         height: 1080,
@@ -172,7 +210,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         kind: "image",
-        figure: "8",
+        figure: "12",
         src: "/work/icoop/orbway.webp",
         width: 1920,
         height: 1080,
@@ -181,7 +219,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         kind: "image",
-        figure: "9",
+        figure: "13",
         src: "/work/icoop/maze.webp",
         width: 1920,
         height: 1080,
@@ -216,7 +254,7 @@ export const caseStudies: CaseStudy[] = [
       {
         // Counts read off Figure 2 (a) and (b) of reports/milestone2_report.pdf.
         kind: "matrix",
-        figure: "10",
+        figure: "14",
         classes: ["Low", "Medium", "High"],
         panels: [
           { title: "Before: sigmoid + MSE", rows: [[266, 14, 0], [32, 75, 0], [0, 13, 0]] },

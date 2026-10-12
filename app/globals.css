@@ -109,8 +109,7 @@ h2 em{font-style:normal;color:var(--red)}
 
 /* ---------- case studies: the statement ---------- */
 .ledger{list-style:none}
-.case{display:grid;grid-template-columns:3rem minmax(0,1fr) minmax(0,.9fr);gap:clamp(1.25rem,3vw,3rem);padding:clamp(2rem,5vh,3.5rem) 0;border-bottom:1px solid var(--line);align-items:start;transition:background-color .3s}
-.case:hover{background:var(--paper-2);box-shadow:0 0 0 1.5rem var(--paper-2)}
+.case{display:grid;grid-template-columns:3rem minmax(0,1fr) minmax(0,.9fr);gap:clamp(1.25rem,3vw,3rem);padding:clamp(2rem,5vh,3.5rem) 0;border-bottom:1px solid var(--line);align-items:start}
 .case-num{font-family:var(--display);font-weight:500;font-size:.85rem;color:var(--muted);letter-spacing:.06em;padding-top:.6rem}
 .case h3{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,2.8vw,2.4rem);line-height:1.05;letter-spacing:-.02em;margin-bottom:.5rem}
 .case h3 .amp{font-family:var(--text);font-style:italic;font-weight:400;color:var(--red)}
@@ -141,6 +140,37 @@ h2 em{font-style:normal;color:var(--red)}
 .fig-clip video{position:relative;background:none}
 .fig figcaption{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.2rem 1rem;align-items:baseline;margin-top:.6rem}
 .fig-n{font-family:var(--display);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+/* ReCHor: the journey replayed on the map */
+.jm{display:grid;gap:.9rem}
+.jm-map{position:relative;background:var(--paper-2)}
+.jm-map svg{display:block;width:100%;height:auto}
+.jm-land{fill:var(--bg);stroke:var(--ink);stroke-width:1;stroke-linejoin:round}
+.jm-lake{fill:#dde3e7}
+.jm-route-bg{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 5;opacity:.35;stroke-linejoin:round}
+.jm-route{fill:none;stroke:var(--red);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.jm-stop circle{fill:var(--bg);stroke:var(--ink);stroke-width:1.5;transition:fill .3s}
+.jm-stop.is-on circle{fill:var(--ink)}
+.jm-stop.is-change.is-on circle{fill:var(--red);stroke:var(--red)}
+.jm-stop text{font-family:var(--display);font-size:15px;fill:var(--ink);opacity:.25;transition:opacity .4s}
+.jm-stop.is-on text{opacity:1}
+.jm-name{font-weight:600}
+.jm-time{font-variant-numeric:tabular-nums;fill:var(--muted)}
+.jm-train{fill:var(--red);stroke:#fff;stroke-width:2.5}
+.jm-pulse{fill:var(--red);opacity:.18;transform-box:fill-box;transform-origin:center;animation:jm-pulse 1.6s ease-out infinite}
+@keyframes jm-pulse{from{transform:scale(.5);opacity:.35}to{transform:scale(1.6);opacity:0}}
+.jm-hud{position:absolute;left:clamp(.8rem,2.5vw,1.6rem);bottom:clamp(.8rem,2.5vw,1.6rem);display:grid;gap:.2rem;pointer-events:none}
+.jm-clock{font-family:var(--display);font-weight:700;font-size:clamp(2rem,6vw,4.2rem);line-height:.9;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.jm-now{font-family:var(--display);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+.jm-stat{position:absolute;right:clamp(.8rem,2.5vw,1.6rem);top:clamp(.8rem,2.5vw,1.6rem);font-family:var(--display);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;max-width:16rem}
+.jm-legs{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;font-family:var(--display);font-size:.82rem;align-items:baseline}
+.jm-legs li{display:flex;gap:.6rem;align-items:baseline;color:var(--muted);transition:color .3s}
+.jm-legs li.is-active,.jm-legs li.is-done{color:var(--ink)}
+.jm-route-name{font-weight:700;border:1px solid currentColor;padding:.05rem .45rem;border-radius:3px}
+.jm-legs li.is-active .jm-route-name{background:var(--red);border-color:var(--red);color:#fff}
+.jm-leg-span{font-variant-numeric:tabular-nums}
+.jm-replay{margin-left:auto}
+.jm-replay .fig-ctl:disabled{opacity:.4;cursor:default}
+@media (max-width:640px){.jm-stop text{font-size:22px}.jm-stat{display:none}}
 .fig-cap{font-style:italic;font-size:.95rem;line-height:1.45;color:var(--muted)}
 .fig-ctl{font-family:var(--display);font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:.85rem .2rem;margin:-.85rem 0;min-width:4.6rem;text-align:right}
 .fig-ctl::before{content:"[ ";color:var(--muted)}

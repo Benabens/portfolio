@@ -22,6 +22,8 @@ type Props = {
   index: number | null;
   /** The thumbnail the viewer should grow from (and shrink back to). */
   origin: (i: number) => HTMLImageElement | null;
+  /** URL of the large version when it is already loaded (fetched ahead): the ghost uses it, not the thumbnail. */
+  sharp?: (i: number) => string | null;
   onIndex: (i: number) => void;
   onClose: () => void;
 };
@@ -39,7 +41,7 @@ function contain(box: { width: number; height: number }, w: number, h: number) {
  * the page behind is inert, Escape closes. The thumbnail grows into place
  * (FLIP on transform only), then the 2400 version fades in over it.
  */
-export default function Lightbox({ slides, index, origin, onIndex, onClose }: Props) {
+export default function Lightbox({ slides, index, origin, sharp, onIndex, onClose }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const ghost = useRef<HTMLImageElement>(null);
@@ -123,7 +125,7 @@ export default function Lightbox({ slides, index, origin, onIndex, onClose }: Pr
       return;
     }
     const t = thumb.getBoundingClientRect();
-    g.src = thumb.currentSrc || thumb.src;
+    g.src = sharp?.(index) || thumb.currentSrc || thumb.src;
     gsap.set(g, { opacity: 1 });
     gsap.fromTo(
       g,

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { prefersReducedMotion } from "@/lib/motion";
 import type { CaseMedia } from "@/content";
+import JourneyMap from "./JourneyMap";
 
 type Clip = Extract<CaseMedia, { kind: "video" }>;
 type Matrix = Extract<CaseMedia, { kind: "matrix" }>;
@@ -164,7 +165,9 @@ export default function Figure({ media }: { media: CaseMedia }) {
       ) : (
         <>
           <div className="fig-frame">
-            {media.kind === "image" ? (
+            {media.kind === "journey" ? (
+              <JourneyMap alt={media.alt} />
+            ) : media.kind === "image" ? (
               <Image
                 className="fig-media"
                 src={media.src}

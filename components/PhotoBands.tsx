@@ -18,6 +18,23 @@ function Band({ city }: { city: City }) {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<number | null>(null);
+  // Large versions fetched ahead (hover, focus, touch): the viewer opens on a sharp photo.
+  const [warm, setWarm] = useState<string[]>([]);
+  const warmed = useRef<Set<string>>(new Set());
+  const heat = (stem: string) => setWarm((w) => (w.includes(stem) ? w : [...w, stem]));
+  const warmImg = (stem: string) =>
+    root.current?.querySelector<HTMLImageElement>(`.city-warm [data-stem="${stem}"] img`) ?? null;
+  const openAt = (i: number) => {
+    const stem = all[i];
+    heat(stem);
+    const t0 = performance.now();
+    const wait = () => {
+      const img = warmImg(stem);
+      if ((img?.complete && img.naturalWidth) || warmed.current.has(stem) || performance.now() - t0 > 600) setView(i);
+      else requestAnimationFrame(wait);
+    };
+    wait();
+  };
   const root = useRef<HTMLLIElement>(null);
   const total = city.photos.length + 1;
   const altOf = (stem: string, i: number) => city.alts?.[stem] ?? `${city.name}, photo ${i + 1} of ${total}`;
@@ -39,6 +56,7 @@ function Band({ city }: { city: City }) {
   const toggle = () => {
     if (open || mounted) return setOpen(!open);
     setMounted(true);
+    all.slice(0, 2).forEach(heat);
     // Two frames: the row mounts collapsed first, so its first opening is animated too.
     requestAnimationFrame(() => requestAnimationFrame(() => setOpen(true)));
   };
@@ -91,9 +109,12 @@ function Band({ city }: { city: City }) {
                       href={`/photos/${city.id}/${stem}-2400.jpg`}
                       data-cursor="view"
                       tabIndex={open ? undefined : -1}
+                      onPointerEnter={() => heat(stem)}
+                      onFocus={() => heat(stem)}
+                      onTouchStart={() => heat(stem)}
                       onClick={(e) => {
                         e.preventDefault();
-                        setView(i);
+                        openAt(i);
                       }}
                     >
                       <Pic city={city.id} stem={stem} alt={altOf(stem, i)} sizes="(max-width: 700px) 60vw, 28rem" />
@@ -106,7 +127,26 @@ function Band({ city }: { city: City }) {
           )}
         </div>
       </div>
-      <Lightbox slides={slides} index={view} origin={origin} onIndex={setView} onClose={() => setView(null)} />
+      {warm.length > 0 && (
+        <div className="city-warm lb-preload" aria-hidden="true">
+          {warm.map((stem) => (
+            <span data-stem={stem} key={stem}>
+              <Pic city={city.id} stem={stem} alt="" sizes="100vw" eager onLoad={() => warmed.current.add(stem)} />
+            </span>
+          ))}
+        </div>
+      )}
+      <Lightbox
+        slides={slides}
+        index={view}
+        origin={origin}
+        sharp={(i) => {
+          const img = warmImg(slides[i]?.stem ?? "");
+          return img?.complete && img.naturalWidth ? img.currentSrc : null;
+        }}
+        onIndex={setView}
+        onClose={() => setView(null)}
+      />
     </li>
   );
 }

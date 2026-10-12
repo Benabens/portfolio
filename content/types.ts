@@ -58,6 +58,8 @@ export type CaseMedia =
       height: number;
     })
   | (MediaBase & { kind: "image"; src: string; width: number; height: number })
+  /** A real ReCHor journey replayed on the map of Switzerland (data: content/rechor-trip.ts). */
+  | (MediaBase & { kind: "journey" })
   | (MediaBase & {
       kind: "matrix";
       /** Class names, in row and column order. */
