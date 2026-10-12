@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { prefersReducedMotion, useMotion } from "@/lib/motion";
+import { Mascot } from "page-mascot";
 import { profile } from "@/content";
 
 /**
@@ -15,6 +16,18 @@ export default function Hero() {
   const scope = useRef<HTMLElement>(null);
   const name = useRef<HTMLHeadingElement>(null);
   const { intro } = useMotion();
+  // The ink head is mounted only for mouse/trackpad visitors on a wide enough
+  // viewport: Chrome fetches its two sprite sheets (≈230 KB) even inside a
+  // display:none subtree, and a phone has neither a pointer to follow nor the
+  // room beside the name. Client-only by construction, so no hydration mismatch.
+  const [mascot, setMascot] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 821px)");
+    const sync = () => setMascot(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useGSAP(
     () => {
@@ -39,6 +52,12 @@ export default function Hero() {
         .from(q(".hero-top"), { y: -10, duration: 0.8 }, "-=1.2")
         .from(q(".hero-grid"), { y: 24, duration: 0.9 }, "-=1")
         .from(q(".stamp"), { scale: 1.6, rotate: -14, duration: 0.5, ease: "power4.out" }, "-=0.4");
+      // The ink head pops up from its feet as the name reaches full width (1.25 s in,
+      // inside the 1.92 s the name takes, so the scroll kinetics start no later).
+      // Not from nothing: it fades while it grows, with a small overshoot. Opacity is
+      // fine here, it is an image, never the LCP element nor a contrast target.
+      const slot = q(".mascot-slot");
+      if (slot.length) tl.from(slot, { scale: 0.7, opacity: 0, duration: 0.5, ease: "back.out(1.4)" }, 1.25);
     },
     { scope, dependencies: [intro] },
   );
@@ -54,6 +73,20 @@ export default function Hero() {
       <div className="hero-top">
         <span>{profile.heroTopLeft}</span>
         <span>{profile.heroTopRight}</span>
+        {/* The author, in ink: a 3×3 sprite head (page-mascot, drawn in characters/ben)
+            that follows the pointer and reacts to a click. Hung from the top rule at the
+            right, level with the first line of the name; the wrapper carries the
+            position and the size because the component sets its own inline styles. */}
+        {mascot && (
+          <span className="mascot-slot">
+            <Mascot
+              directions="/mascots/ben-directions.webp"
+              reactions="/mascots/ben-reactions.webp"
+              size={112}
+              label="Benjamin mascot"
+            />
+          </span>
+        )}
       </div>
       <h1 className="hero-name" ref={name} aria-label={`${profile.firstName} ${profile.lastName}`}>
         {letters(profile.firstName)}
