@@ -61,7 +61,8 @@ export const journey: JourneyStep[] = [
   {
     number: "09",
     when: "Oct 2026",
-    title: "Biosynex, incoming",
-    text: "Incoming AI engineer (part-time contractor), remote, for a Euronext-listed rapid diagnostics company. Engaged to introduce the executive team to applied AI, then build AI tools into internal workflows.",
+    title: "Biosynex, AI Engineer",
+    text: "AI Engineer (part-time), remote, for a Euronext-listed rapid diagnostics company. Building a copilot over regulatory and quality documentation to speed up compliance and document search; deploying AI agents and automation pipelines (tender responses, reporting, recurring tasks) and leading AI adoption through training on LLMs, agentic workflows and automation.",
+    now: true,
   },
 ];
