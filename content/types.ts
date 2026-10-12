@@ -111,6 +111,8 @@ export type City = {
   id: string;
   /** true: the band is not shown and none of its photos is generated or served. */
   hidden?: boolean;
+  /** Caption in the viewer, per stem: the place, and the month when it is known. Defaults to the band name. */
+  captions?: Record<string, string>;
   /** Set in Archivo on the width axis over the cover. */
   name: string;
   country: string;

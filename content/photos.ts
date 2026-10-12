@@ -8,6 +8,8 @@ import type { City } from "./types";
 // ~/Pictures/Portfolio/<CODE>/ (originals, not in the repo).
 // 8 October 2026: only the photos Ben kept after grading are listed; the version he
 // picked (Canon natural / cine / B&W, or the original) sits in ~/Pictures/Portfolio/_final/.
+// Captions (12 October 2026): the place, and the month when the photo's date is reliable;
+// the alts stay as the image descriptions for screen readers.
 // Web versions: `npm run photos` (scripts/photos.mjs) writes public/photos/<id>/
 // and content/photos.generated.ts. Re-run it once the originals are graded.
 
@@ -27,6 +29,11 @@ const bands: City[] = [
     cover: "MTL-01",
     coverFocus: "50% 35%",
     photos: ["MTL-02", "MTL-03"],
+    captions: {
+      "MTL-01": "Montréal · January 2026",
+      "MTL-02": "Montréal · January 2026",
+      "MTL-03": "Montréal · January 2026",
+    },
     alts: {
       "MTL-01": "Two office towers lit against a deep blue night sky",
       "MTL-02": "A downtown street between towers at dusk, street lamps on",
@@ -45,6 +52,13 @@ const bands: City[] = [
     cover: "TLV-04",
     coverFocus: "50% 45%",
     photos: ["TLV-08", "TLV-07", "TLV-06", "TLV-05"],
+    captions: {
+      "TLV-04": "Tel Aviv · February 2025",
+      "TLV-05": "Tel Aviv · March 2025",
+      "TLV-06": "Tel Aviv · April 2025",
+      "TLV-07": "Tel Aviv · April 2025",
+      "TLV-08": "Tel Aviv · October 2025",
+    },
     alts: {
       "TLV-04": "Palm trees and a street lamp against a stormy sunset over the sea",
       "TLV-08": "The sun going down behind clouds over the sea",
@@ -65,6 +79,9 @@ const bands: City[] = [
     coverFocus: "50% 42%",
     // IBZ and IBZ2 are the same island, two summers.
     photos: [],
+    captions: {
+      "IBZ2-04": "Ushuaïa, Ibiza · August 2025",
+    },
     alts: {
       "IBZ-01": "The Ibiza letters and two giant red cherries on a paved square",
       "IBZ-04": "A pool at dusk",
@@ -86,6 +103,14 @@ const bands: City[] = [
     cover: "MX2-04",
     coverFocus: "50% 40%",
     photos: ["MX2-01", "MX2-02", "MX2-03", "MX2-05", "MX2-06"],
+    captions: {
+      "MX2-04": "Mexico · February 2025",
+      "MX2-01": "Mexico · February 2025",
+      "MX2-02": "Mexico · February 2025",
+      "MX2-03": "Mexico · February 2025",
+      "MX2-06": "Mexico · February 2025",
+      "MX2-05": "Playa del Carmen · February 2025",
+    },
     alts: {
       "MX2-04": "Palm trees over a beach lounge",
       "MX2-01": "A sand path between palm trees",
@@ -104,6 +129,11 @@ const bands: City[] = [
     coverFocus: "50% 40%",
     coverTone: "light",
     photos: ["MYK-01", "MYK-02"],
+    captions: {
+      "MYK-03": "Mykonos · August 2025",
+      "MYK-01": "Mykonos · August 2025",
+      "MYK-02": "Mykonos · August 2025",
+    },
     alts: {
       "MYK-03": "A whitewashed alley with blue balconies and laundry",
       "MYK-01": "A white house with blue doors and stairs",
@@ -118,6 +148,10 @@ const bands: City[] = [
     cover: "TRF-TGR-04",
     coverFocus: "50% 55%",
     photos: ["TRF-TGR-01"],
+    captions: {
+      "TRF-TGR-04": "Isla de las Palomas, Tarifa · September 2025",
+      "TRF-TGR-01": "Tarifa – Tangier · September 2025",
+    },
     alts: {
       "TRF-TGR-04": "Two kites over the sea at sunset",
       "TRF-TGR-01": "Waves under an orange sky",
@@ -133,6 +167,9 @@ const bands: City[] = [
     cover: "MRB-02",
     coverFocus: "50% 62%",
     photos: [],
+    captions: {
+      "MRB-02": "Marbella · August 2024",
+    },
     alts: {
       "MRB-04": "The bow of a jet ski on open sea",
       "MRB-06": "A shoreline at dusk",
@@ -150,6 +187,10 @@ const bands: City[] = [
     cover: "SKI-01",
     coverFocus: "50% 70%",
     photos: ["SKI-02"],
+    captions: {
+      "SKI-01": "Megève · January 2025",
+      "SKI-02": "Saint-Gervais · February 2025",
+    },
     alts: {
       "SKI-01": "A snowy forest under a grey sky",
       "SKI-02": "A snow-covered peak under a blue sky",
@@ -165,6 +206,19 @@ const bands: City[] = [
     cover: "CLOUD-01",
     coverFocus: "50% 55%",
     photos: ["CLOUD-02", "CLOUD-03", "CLOUD-05", "CLOUD-06", "CLOUD-08", "CLOUD-09", "CLOUD-11", "CLOUD-12", "CLOUD-13", "CLOUD-15"],
+    captions: {
+      "CLOUD-01": "Zénith de Strasbourg · December 2023",
+      "CLOUD-02": "Zénith de Strasbourg · December 2023",
+      "CLOUD-03": "March 2024",
+      "CLOUD-05": "Galleria Vittorio Emanuele II, Milan",
+      "CLOUD-06": "Cloud",
+      "CLOUD-08": "Arc de Triomphe, Paris · May 2024",
+      "CLOUD-09": "Le Bourget, Paris · May 2024",
+      "CLOUD-11": "Bois de Boulogne, Paris · September 2024",
+      "CLOUD-12": "Paris · September 2025",
+      "CLOUD-13": "October 2025",
+      "CLOUD-15": "October 2025",
+    },
     alts: {
       "CLOUD-01": "A pianist on stage under a fan of light beams",
       "CLOUD-03": "A concert hall under a rectangle of blue neon",
@@ -191,6 +245,10 @@ const bands: City[] = [
     cover: "LOVE-01",
     coverFocus: "50% 60%",
     photos: ["LOVE-05"],
+    captions: {
+      "LOVE-01": "La Douze, Dordogne · July 2024",
+      "LOVE-05": "July 2025",
+    },
     alts: {
       "LOVE-01": "A lake at dusk, the last light reflected in the water",
       "LOVE-02": "A campfire seen through the trees at nightfall",
