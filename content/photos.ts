@@ -209,15 +209,15 @@ const bands: City[] = [
     captions: {
       "CLOUD-01": "Zénith de Strasbourg · December 2023",
       "CLOUD-02": "Zénith de Strasbourg · December 2023",
-      "CLOUD-03": "March 2024",
+      "CLOUD-03": "Gate Club, Paris · March 2024",
       "CLOUD-05": "Galleria Vittorio Emanuele II, Milan",
-      "CLOUD-06": "Cloud",
+      "CLOUD-06": "Keinemusik, Hangar · 2023",
       "CLOUD-08": "Arc de Triomphe, Paris · May 2024",
       "CLOUD-09": "Le Bourget, Paris · May 2024",
       "CLOUD-11": "Bois de Boulogne, Paris · September 2024",
       "CLOUD-12": "Paris · September 2025",
-      "CLOUD-13": "October 2025",
-      "CLOUD-15": "October 2025",
+      "CLOUD-13": "Lausanne · October 2025",
+      "CLOUD-15": "Lausanne · October 2025",
     },
     alts: {
       "CLOUD-01": "A pianist on stage under a fan of light beams",
@@ -247,7 +247,7 @@ const bands: City[] = [
     photos: ["LOVE-05"],
     captions: {
       "LOVE-01": "La Douze, Dordogne · July 2024",
-      "LOVE-05": "July 2025",
+      "LOVE-05": "Mévouillon · July 2025",
     },
     alts: {
       "LOVE-01": "A lake at dusk, the last light reflected in the water",
