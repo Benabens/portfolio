@@ -12,6 +12,8 @@ export type Slide = {
   cityName: string;
   stem: string;
   alt: string;
+  /** Shown under the photo: where (and when) it was taken. */
+  caption: string;
 };
 
 type Props = {
@@ -72,6 +74,8 @@ export default function Lightbox({ slides, index, origin, onIndex, onClose }: Pr
     const thumb = origin(i);
     const b = box();
     const done = () => {
+      // Leave no inline opacity behind: the next opening starts clean.
+      gsap.set([full.current, ghost.current, veil.current, ...chrome.current], { clearProps: "opacity" });
       d.close();
       closing.current = false;
       onClose();
@@ -165,10 +169,22 @@ export default function Lightbox({ slides, index, origin, onIndex, onClose }: Pr
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
+  // The fade-in is CSS (.lb-full.is-loaded); the ghost goes once it is covered.
   const onLoaded = () => {
     setLoaded(true);
-    gsap.fromTo(full.current, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out", onComplete: () => gsap.set(ghost.current, { opacity: 0 }) });
+    window.setTimeout(() => gsap.set(ghost.current, { opacity: 0 }), 320);
   };
+  // A cached image can be complete before React listens to it.
+  useEffect(() => {
+    if (!open || loaded) return;
+    const img = full.current?.querySelector("img");
+    if (img?.complete && img.naturalWidth) onLoaded();
+  });
+  // The stage only has a size once the dialog is shown: measure again then.
+  const [, remeasure] = useState(0);
+  useEffect(() => {
+    if (open) requestAnimationFrame(() => remeasure((v) => v + 1));
+  }, [open]);
 
   const go = (delta: number) => {
     if (!open || total < 2) return;
@@ -236,7 +252,7 @@ export default function Lightbox({ slides, index, origin, onIndex, onClose }: Pr
       <div className="lb-bar lb-bottom" ref={(el) => {
         if (el) chrome.current[1] = el;
       }}>
-        <p className="lb-cap">{slide?.alt}</p>
+        <p className="lb-cap">{slide?.caption}</p>
         <div className="lb-ctl">
           <button type="button" onClick={() => go(-1)} aria-label="Previous photo">
             Prev

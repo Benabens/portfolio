@@ -21,10 +21,19 @@ function Band({ city }: { city: City }) {
   const root = useRef<HTMLLIElement>(null);
   const total = city.photos.length + 1;
   const altOf = (stem: string, i: number) => city.alts?.[stem] ?? `${city.name}, photo ${i + 1} of ${total}`;
-  const slides: Slide[] = [city.cover, ...city.photos].map((stem, i) => ({ city: city.id, cityName: city.name, stem, alt: altOf(stem, i) }));
-  // The thumbnail a slide grows from: the band for the cover, the frame in the row otherwise.
+  const all = [city.cover, ...city.photos];
+  const slides: Slide[] = all.map((stem, i) => ({
+    city: city.id,
+    cityName: city.name,
+    stem,
+    alt: altOf(stem, i),
+    caption: city.captions?.[stem] ?? city.name,
+  }));
+  // The thumbnail a slide grows from: its frame in the row (the cover is No. 01 there too).
   const origin = (i: number) =>
-    root.current?.querySelector<HTMLImageElement>(i === 0 ? ".city-img img" : `.strip li[data-stem="${slides[i]?.stem}"] img`) ?? null;
+    root.current?.querySelector<HTMLImageElement>(`.strip li[data-stem="${slides[i]?.stem}"] img`) ??
+    root.current?.querySelector<HTMLImageElement>(".city-img img") ??
+    null;
   const where = [city.country !== city.name ? city.country : "", city.year].filter(Boolean).join(" · ");
 
   const toggle = () => {
@@ -71,10 +80,10 @@ function Band({ city }: { city: City }) {
         <div className="city-row-in">
           {mounted && (
             <ul className="strip">
-              {city.photos.map((stem, i) => {
+              {all.map((stem, i) => {
                 const meta = photoMeta[stem];
                 if (!meta) return null;
-                const n = String(i + 2).padStart(2, "0");
+                const n = String(i + 1).padStart(2, "0");
                 return (
                   <li key={stem} data-stem={stem} style={{ "--r": (meta.w / meta.h).toFixed(4) } as CSSProperties}>
                     {/* The link is the no-script fallback: with script, it opens the viewer in place. */}
@@ -84,10 +93,10 @@ function Band({ city }: { city: City }) {
                       tabIndex={open ? undefined : -1}
                       onClick={(e) => {
                         e.preventDefault();
-                        setView(i + 1);
+                        setView(i);
                       }}
                     >
-                      <Pic city={city.id} stem={stem} alt={altOf(stem, i + 1)} sizes="(max-width: 700px) 60vw, 28rem" />
+                      <Pic city={city.id} stem={stem} alt={altOf(stem, i)} sizes="(max-width: 700px) 60vw, 28rem" />
                       <span className="strip-n">No.&nbsp;{n}</span>
                     </a>
                   </li>

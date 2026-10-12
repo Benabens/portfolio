@@ -250,7 +250,12 @@ html.lb-open{overflow:hidden}
 .lb-stage{position:relative;min-height:0;margin:.7rem 0;touch-action:pan-y}
 .lb-ghost,.lb-full{position:absolute;inset:0;margin:auto;display:block}
 .lb-ghost{object-fit:contain;transform-origin:0 0;will-change:transform;opacity:0}
-.lb-full{opacity:0}
+.lb-full{opacity:0;transition:opacity .3s ease-out}
+.lb-full.is-loaded{opacity:1}
+/* The custom cursor sits under the dialog's top layer: the viewer gets the native one back. */
+html.has-cursor.lb-open #cursor{opacity:0}
+html.has-cursor .lb,html.has-cursor .lb *{cursor:default}
+html.has-cursor .lb button{cursor:pointer}
 .lb-full picture,.lb-full img{display:block;width:100%;height:100%;object-fit:contain}
 .lb-preload{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
 @media (max-width:700px){.lb-stage{margin:.5rem 0}.lb-cap{flex:1 1 100%;max-width:none}.lb-ctl{margin-left:0}}
