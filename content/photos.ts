@@ -150,8 +150,9 @@ const bands: City[] = [
     year: "",
     cover: "CLOUD-01",
     coverFocus: "50% 55%",
-    photos: ["CLOUD-02", "CLOUD-03", "CLOUD-05", "CLOUD-06", "CLOUD-08", "CLOUD-09", "CLOUD-11", "CLOUD-12", "CLOUD-13", "CLOUD-15"],
+    photos: ["CLOUD-02", "CLOUD-03", "CLOUD-05", "CLOUD-06", "CLOUD-08", "CLOUD-09", "CLOUD-11", "CLOUD-12", "CLOUD-13", "CLOUD-15", "IBZ2-04"],
     captions: {
+      "IBZ2-04": "Ushuaïa, Ibiza · August 2025",
       "CLOUD-01": "Zénith de Strasbourg · December 2023",
       "CLOUD-02": "Zénith de Strasbourg · December 2023",
       "CLOUD-03": "Gate Club, Paris · March 2024",
@@ -165,6 +166,7 @@ const bands: City[] = [
       "CLOUD-15": "Lausanne · October 2025",
     },
     alts: {
+      "IBZ2-04": "The Ushuaïa stage at night, flames on both sides",
       "CLOUD-01": "A pianist on stage under a fan of light beams",
       "CLOUD-03": "A concert hall under a rectangle of blue neon",
       "CLOUD-04": "A club crowd seen from the back",
