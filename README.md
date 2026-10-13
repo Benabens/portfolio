@@ -35,7 +35,7 @@ Every figure comes from the CV and holds up in an interview; nothing is invented
 - Scroll reveals (once), count-up metrics, custom cursor and magnetic buttons on fine pointers only.
 - Figures under the case studies: 7 s muted loops (H.264 + WebM, `preload="none"`) that play only while on screen and can be paused.
 - Photo bands (one per city or highlight): the cover drifts a little against the scroll, the city name widens on the width axis, a band opens on the rest of its roll.
-- The author in ink, top right of the hero: a 3×3 sprite head ([`page-mascot`](https://www.npmjs.com/package/page-mascot)) that follows the pointer and reacts to a click. Drawn by hand as SVG in `characters/ben/draw.py`, built into the two sheets in `public/mascots/` by the page-mascot skill. Mounted for mouse/trackpad visitors from 821px up only, so phones download nothing.
+- The author, top right of the hero: a 3×3 sprite head ([`page-mascot`](https://www.npmjs.com/package/page-mascot)) whose gaze follows the pointer. Decorative only: a click does nothing, it is out of the tab order and hidden from assistive technology. Drawn with ChatGPT's image model from the portrait (the two source sheets are in `characters/ben/`), built into `public/mascots/` by the page-mascot skill; the page only ever requests the directions sheet. Mounted for mouse/trackpad visitors from 821px up only, so phones download nothing.
 - `prefers-reduced-motion`: no preloader, no smooth scroll, no kinetic type, no parallax, clips stay on their poster until asked; the content is identical.
 
 ## Run

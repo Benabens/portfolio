@@ -7,6 +7,8 @@ import { prefersReducedMotion, useMotion } from "@/lib/motion";
 import { Mascot } from "page-mascot";
 import { profile } from "@/content";
 
+const MASCOT_SHEET = "/mascots/ben-directions.webp";
+
 /**
  * The name is set in Archivo and printed on its width axis: it enters
  * condensed (wdth 62), widens to 125 as the curtain lifts, then compresses
@@ -16,8 +18,8 @@ export default function Hero() {
   const scope = useRef<HTMLElement>(null);
   const name = useRef<HTMLHeadingElement>(null);
   const { intro } = useMotion();
-  // The ink head is mounted only for mouse/trackpad visitors on a wide enough
-  // viewport: Chrome fetches its two sprite sheets (≈230 KB) even inside a
+  // The mascot is mounted only for mouse/trackpad visitors on a wide enough
+  // viewport: Chrome fetches its sprite sheet (≈225 KB) even inside a
   // display:none subtree, and a phone has neither a pointer to follow nor the
   // room beside the name. Client-only by construction, so no hydration mismatch.
   const [mascot, setMascot] = useState(false);
@@ -52,7 +54,7 @@ export default function Hero() {
         .from(q(".hero-top"), { y: -10, duration: 0.8 }, "-=1.2")
         .from(q(".hero-grid"), { y: 24, duration: 0.9 }, "-=1")
         .from(q(".stamp"), { scale: 1.6, rotate: -14, duration: 0.5, ease: "power4.out" }, "-=0.4");
-      // The ink head pops up from its feet as the name reaches full width (1.25 s in,
+      // The mascot pops up from its feet as the name reaches full width (1.25 s in,
       // inside the 1.92 s the name takes, so the scroll kinetics start no later).
       // Not from nothing: it fades while it grows, with a small overshoot. Opacity is
       // fine here, it is an image, never the LCP element nor a contrast target.
@@ -73,18 +75,18 @@ export default function Hero() {
       <div className="hero-top">
         <span>{profile.heroTopLeft}</span>
         <span>{profile.heroTopRight}</span>
-        {/* The author, in ink: a 3×3 sprite head (page-mascot, drawn in characters/ben)
-            that follows the pointer and reacts to a click. Hung from the top rule at the
-            right, level with the first line of the name; the wrapper carries the
-            position and the size because the component sets its own inline styles. */}
+        {/* The author as a 3×3 sprite head (page-mascot, sheets from characters/ben) whose
+            gaze follows the pointer. Hung from the top rule at the right, level with the
+            first line of the name; the wrapper carries the position and the size because
+            the component sets its own inline styles.
+            Decorative, and nothing else: `inert` takes the component's button out of the
+            tab order, of the accessibility tree and of hit-testing, so a click or a key
+            never reaches it and it never plays a reaction (the gaze listens on window and
+            is unaffected). The component still asks for a reactions sheet: it gets the
+            directions one again, so no second file is ever requested. */}
         {mascot && (
-          <span className="mascot-slot">
-            <Mascot
-              directions="/mascots/ben-directions.webp"
-              reactions="/mascots/ben-reactions.webp"
-              size={112}
-              label="Benjamin mascot"
-            />
+          <span className="mascot-slot" aria-hidden="true" inert>
+            <Mascot directions={MASCOT_SHEET} reactions={MASCOT_SHEET} size={112} />
           </span>
         )}
       </div>
