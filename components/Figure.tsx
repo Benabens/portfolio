@@ -168,13 +168,16 @@ export default function Figure({ media }: { media: CaseMedia }) {
             {media.kind === "journey" ? (
               <JourneyMap alt={media.alt} />
             ) : media.kind === "image" ? (
+              // Screens with small text: the 2000 px WebP is served as captured (no re-encoding,
+              // no downscale to the 44rem slot), so the UI stays sharp on retina screens.
               <Image
                 className="fig-media"
                 src={media.src}
                 alt={media.alt}
                 width={media.width}
                 height={media.height}
-                sizes="(max-width: 820px) 100vw, 44rem"
+                unoptimized
+                sizes={media.wide ? "(max-width: 820px) 100vw, 80vw" : "(max-width: 820px) 100vw, 44rem"}
               />
             ) : (
               <Matrices media={media} />

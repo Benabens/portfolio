@@ -58,13 +58,6 @@ export default function Work() {
           scrollTrigger: { trigger: frame, start: "top 88%", once: true },
         },
       );
-      const img = frame.querySelector<HTMLElement>(":scope > img.fig-media");
-      if (img)
-        gsap.fromTo(
-          img,
-          { scale: 1.06, yPercent: -2.5 },
-          { yPercent: 2.5, ease: "none", scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: true } },
-        );
     });
   });
 

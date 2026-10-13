@@ -149,7 +149,6 @@ h2 em{font-style:normal;color:var(--red)}
 .fig{flex:1 1 20rem;max-width:46rem;min-width:0}
 .fig-wide{flex-basis:100%;max-width:none}
 .fig-frame{border:1.5px solid var(--ink);padding:.5rem;background:var(--bg);overflow:hidden}
-.fig-frame>img.fig-media{will-change:transform}
 .fig-media{display:block;width:100%;height:auto;background:var(--ink)}
 .fig-clip{position:relative;background:var(--ink)}
 .fig-clip .fig-still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
