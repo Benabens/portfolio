@@ -35,6 +35,7 @@ export const photoMeta: Record<string, PhotoMeta> = {
   "CLOUD-12": { w: 1122, h: 1402, blur: "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoNABAABABoJZgCdAEUmsBmoeIAAP2aHWgSHHkuArPOlqGitcEqT0d5fTCUwDfgZc5PzsAj/6hs8Q82a5MCecPYxvUuGXWnF0BM66jCX/oZAAAA" },
   "CLOUD-13": { w: 1122, h: 1402, blur: "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAQCdASoNABAABABoJaQAAv251RAmcAAA/uYufwXqCoqA8s4NOsmaAG4/xfWuDuzZIRbfY/BhxY/K23LmvTAYC0GGrd+CySl/a/FN6zhMjZvytd5CEyI9B9/6RTGcroAAAA==" },
   "CLOUD-15": { w: 1122, h: 1402, blur: "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACwAQCdASoNABAABABoJQAAW56tbhKAAP72jVRLfD17Yzg6RM1JRsMAgTTH45ewxa8WO4zZ8Au70ADzeg9OgAAA" },
+  "IBZ2-04": { w: 1350, h: 2400, blur: "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoJABAABABoJbAC7AEPAfs/z6EAAP71aoHWSzVNLWPBKZX1b3LjR2b7HropxbihOAs9TCd+4ExhEFk7fJaP/YAA" },
   "LOVE-01": { w: 1122, h: 1402, blur: "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoNABAABABoJaQAAucNEZIdAAD+7tr9CFm1DZ5w2Ynm3SuDPi6MSOQrrN4ss8kgyNe8s4sAAAA=" },
   "LOVE-01-band": { w: 1122, h: 561, blur: "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoNABAABABoJaQAAucNEZIdAAD+7tr9CFm1DZ5w2Ynm3SuDPi6MSOQrrN4ss8kgyNe8s4sAAAA=" },
   "LOVE-05": { w: 586, h: 429, blur: "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoQAAwABABoJQBdgCHw0mWBFhAA/qnK4n4gCq5yoDoBFtBsjDZOzDWq4uvtOAee45p0z+frg/UwKwuBiiw3cAAA" },
