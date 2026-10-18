@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Source_Serif_4 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import Providers from "@/components/Providers";
 import Preloader from "@/components/Preloader";
 import Interactions from "@/components/Interactions";
@@ -77,6 +78,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Nav />
           {children}
         </Providers>
+        {/* Cookieless page views (Vercel Web Analytics), served same-origin from /_vercel/insights. */}
+        <Analytics />
       </body>
     </html>
   );
