@@ -10,7 +10,7 @@ One-page portfolio, direction **02 · Relevé**: an engineer's statement of acco
 - **GSAP 3** + ScrollTrigger via `@gsap/react`, **Lenis** for smooth scroll
 - `next/font` for Archivo (variable, width axis) and Source Serif 4 (optical size)
 - Generated Open Graph image, favicon, robots and sitemap from the App Router metadata API
-- Deployed on Vercel
+- Deployed on Vercel, with Vercel Web Analytics (`@vercel/analytics`, mounted in the root layout): cookieless page views, so no consent banner
 
 ## Content
 
