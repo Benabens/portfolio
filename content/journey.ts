@@ -31,7 +31,7 @@ export const journey: JourneyStep[] = [
     number: "04",
     when: "2024 · 3 months",
     title: "NanoSynex",
-    text: "AI & automation (project-based) for a Technion spin-off, reporting to the CEO. Deployed two offline LLMs (Ollama; Mistral 7B, Llama 3 8B) behind a router with a shared Obsidian memory, so confidential R&D and investor documents never left the machine (GDPR); Python scripts triaging the CEO's Gmail and Outlook inboxes with an LLM classifier; the test reader's experiment exports harmonised and cleaned (Python, pandas), then matched against a partner veterinary lab's reference results to measure agreement rates for a validation study.",
+    text: "Software engineer, ML & statistical modeling, for a Technion medtech spin-off (EU-funded rapid antibiotic susceptibility testing). Modeled bacterial growth in Python and NumPy to compare Wald's sequential probability ratio test with a fixed-threshold rule: in simulation, the SPRT reached a decision 20% sooner, with a major-error rate below 3%. Also deployed two offline LLMs (Ollama; Mistral 7B, Llama 3 8B) behind a router with a shared Obsidian memory, so confidential R&D and investor documents never left the machine (GDPR); triaged the CEO's Gmail and Outlook inboxes with an LLM classifier; harmonised the test reader's experiment exports (Python, pandas) and matched them against a partner veterinary lab's reference results to measure agreement rates for a validation study.",
   },
   {
     number: "05",
