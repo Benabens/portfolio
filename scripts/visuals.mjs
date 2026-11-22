@@ -48,7 +48,8 @@ async function open(view) {
   await page.setViewport(view.viewport);
   if (view.reduced) await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
   const errors = [];
-  page.on("console", (m) => m.type() === "error" && !/Failed to load resource/.test(m.text()) && errors.push(m.text().slice(0, 200)));
+  // Off Vercel the analytics script is a 404 that nosniff then refuses to run.
+  page.on("console", (m) => m.type() === "error" && !/Failed to load resource|_vercel\/insights/.test(m.text()) && errors.push(m.text().slice(0, 200)));
   page.on("pageerror", (e) => errors.push("pageerror: " + e.message.slice(0, 200)));
   page.on("requestfailed", (r) => {
     // A media element aborts its own range requests; the analytics script only exists on Vercel.
