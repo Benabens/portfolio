@@ -35,7 +35,7 @@ const check = (name, ok, detail) => {
       const peek = document.getElementById("peek");
       const r = peek.getBoundingClientRect();
       const cur = document.getElementById("cursor");
-      const mag = document.querySelector(".play");
+      const mag = document.querySelector(".contact .btn-fill");
       const t = mag ? getComputedStyle(mag).transform : "none";
       const m = t.match(/matrix\(([^)]+)\)/);
       const p = m ? m[1].split(",").map(Number) : [1, 0, 0, 1, 0, 0];
@@ -68,8 +68,9 @@ const check = (name, ok, detail) => {
       const dist = Math.round(Math.hypot(peek.left + peek.width / 2 - pt.x, peek.top + peek.height / 2 - pt.y));
       return { inside, dist, peek: [peek.left, peek.top, peek.width, peek.height].map(Math.round), pointer: [Math.round(pt.x), Math.round(pt.y)] };
     }, pt);
+  // The section links are "/#work", "/#contact"… (they lead home from the off-hours page).
   const anchor = async (href) => {
-    await page.evaluate((h) => document.querySelector(`.nav-links a[href="${h}"]`).click(), href);
+    await page.evaluate((h) => document.querySelector(`.nav-links a[href="/${h}"]`).click(), href);
     await sleep(2200);
   };
 
@@ -83,7 +84,7 @@ const check = (name, ok, detail) => {
   // and move: the card must follow the pointer again and stay inside the section.
   await page.mouse.move(pointer.x, 5, { steps: 4 });
   await sleep(500);
-  pointer = await hoverRow(4);
+  pointer = await hoverRow(3);
   pointer = { x: pointer.x + 40, y: pointer.y + 4 };
   await page.mouse.move(pointer.x, pointer.y, { steps: 4 });
   await sleep(800);
@@ -126,10 +127,10 @@ const check = (name, ok, detail) => {
   s = await state();
   check(`cursor state reset after Lenis scroll (was "${before}")`, !s.cursorState, s);
 
-  // magnetic play button stuck displaced after a Lenis scroll?
-  await anchor("#music");
+  // magnetic button (the CV download) stuck displaced after a Lenis scroll?
+  await anchor("#contact");
   const pb = await page.evaluate(() => {
-    const r = document.querySelector(".play").getBoundingClientRect();
+    const r = document.querySelector(".contact .btn-fill").getBoundingClientRect();
     return { x: r.left + r.width * 0.8, y: r.top + r.height * 0.8 };
   });
   await page.mouse.move(pb.x, pb.y, { steps: 4 });
@@ -155,7 +156,8 @@ const check = (name, ok, detail) => {
   await page.evaluate(() => window.scrollTo(0, document.getElementById("more").offsetTop - 30));
   await sleep(1000);
   const box = await page.evaluate(() => {
-    const r = document.querySelectorAll(".row")[4].getBoundingClientRect();
+    // The row that stays on the page (the C project, no public repo): a tap must not navigate away.
+    const r = [...document.querySelectorAll(".row")].find((row) => !row.querySelector('a[target="_blank"]')).getBoundingClientRect();
     return { x: r.left + 40, y: r.top + r.height / 2 };
   });
   await page.touchscreen.touchStart(box.x, box.y);
