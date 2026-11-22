@@ -186,7 +186,7 @@ const bands: City[] = [
   },
   {
     id: "love",
-    name: "Love",
+    name: "Scout",
     country: "",
     year: "",
     cover: "LOVE-01",
