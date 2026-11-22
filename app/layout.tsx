@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, Source_Serif_4 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Providers from "@/components/Providers";
-import Preloader from "@/components/Preloader";
 import Interactions from "@/components/Interactions";
 import Nav from "@/components/Nav";
+import SkipLink from "@/components/SkipLink";
 import { site } from "@/content";
 import "./globals.css";
 
@@ -62,18 +62,16 @@ export const viewport: Viewport = {
 };
 
 // Locks scrolling before hydration so the preloader can run without a scrollbar jump.
-const loadingScript = `if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-loading')}`;
+// Home page only: the preloader is the home page's opening, not every page's.
+const loadingScript = `if(location.pathname==='/'&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-loading')}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${archivo.variable} ${sourceSerif.variable} ${sourceSerifItalic.variable}`} suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: loadingScript }} />
-        <a className="skip" href="#work">
-          Skip to work
-        </a>
         <Providers>
-          <Preloader />
+          <SkipLink />
           <Interactions />
           <Nav />
           {children}

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { MotionProvider, prefersReducedMotion, useMotion } from "@/lib/motion";
@@ -37,10 +38,49 @@ function SmoothScroll() {
   return null;
 }
 
+/**
+ * Page changes, with Lenis in charge of the scroll: a new page starts at its top, or
+ * at its #section when the link carried one (Work, Journey, Contact from another page).
+ * The old #photo and #music anchors of the home page now live on the off-hours page.
+ */
+function RouteSync() {
+  const pathname = usePathname();
+  const { lenis } = useMotion();
+  const first = useRef(true);
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (pathname === "/" && (hash === "#photo" || hash === "#music")) {
+      window.location.replace(`/off-hours${hash}`);
+      return;
+    }
+    if (first.current) {
+      // Hard load: the browser has already handled the hash.
+      first.current = false;
+      return;
+    }
+    lenis.current?.resize();
+    ScrollTrigger.refresh();
+    if (hash.length > 1) {
+      // Land where the same link lands on the home page itself (Nav: 60 px under the
+      // top), once the new page's sections have measured themselves.
+      requestAnimationFrame(() => {
+        const el = document.querySelector<HTMLElement>(hash);
+        if (el) lenis.current?.scrollTo(el, { offset: -60, immediate: true, force: true });
+      });
+    } else {
+      lenis.current?.scrollTo(0, { immediate: true, force: true });
+    }
+  }, [pathname, lenis]);
+
+  return null;
+}
+
 export default function Providers({ children }: { children: ReactNode }) {
   return (
     <MotionProvider>
       <SmoothScroll />
+      <RouteSync />
       {children}
     </MotionProvider>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { usePathname } from "next/navigation";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { hasFinePointer, prefersReducedMotion } from "@/lib/motion";
 
@@ -10,6 +11,8 @@ import { hasFinePointer, prefersReducedMotion } from "@/lib/motion";
  */
 export default function Interactions() {
   const cursor = useRef<HTMLDivElement>(null);
+  // Bound again on every page: the magnetic buttons are looked up once per page.
+  const pathname = usePathname();
 
   useGSAP(() => {
     const cur = cursor.current;
@@ -84,7 +87,7 @@ export default function Interactions() {
       cleanups.forEach((fn) => fn());
       root.classList.remove("has-cursor", "is-live");
     };
-  });
+  }, { dependencies: [pathname], revertOnUpdate: true });
 
   return (
     <div id="cursor" ref={cursor} aria-hidden="true">

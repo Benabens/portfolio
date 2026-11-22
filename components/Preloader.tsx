@@ -29,12 +29,14 @@ export default function Preloader() {
         setDone(true);
       };
 
-      if (prefersReducedMotion()) {
+      // It plays once, on a hard load of the home page: the inline script in the layout
+      // has set is-loading before hydration. Back from another page, the hero comes
+      // straight in.
+      if (prefersReducedMotion() || !document.documentElement.classList.contains("is-loading")) {
         finish();
         return;
       }
 
-      document.documentElement.classList.add("is-loading");
       lenis.current?.stop();
 
       const num = el.querySelector<HTMLElement>(".pre-num");

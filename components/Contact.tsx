@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useSectionMotion } from "@/lib/useSectionMotion";
 import { setupReveals } from "@/lib/reveals";
 import { contactIntro, site } from "@/content";
-import Clock from "./Clock";
+import Foot from "./Foot";
 
 export default function Contact() {
   const scope = useRef<HTMLElement>(null);
@@ -36,15 +36,7 @@ export default function Contact() {
           </a>
         </div>
       </div>
-      <footer className="foot">
-        <span>
-          {site.name} · {site.city}, Switzerland
-        </span>
-        <Clock prefix="Local time " suffix=" (CET)" />
-        <span>
-          {site.fonts} · © {site.year}
-        </span>
-      </footer>
+      <Foot page="home" />
     </section>
   );
 }
