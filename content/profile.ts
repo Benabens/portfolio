@@ -1,6 +1,7 @@
 import type { Fact } from "./types";
 
-// Hero and statement. Frozen from CV V5 (2026-09-25) and the "Portfolio web — contenu" note.
+// Hero and statement. Facts from the CV frozen on 22 November 2026 (Brain/CV/CV.md, section 9);
+// the statement comes from the "Portfolio web — contenu" note.
 
 export const profile = {
   firstName: "Benjamin",
@@ -21,9 +22,10 @@ export const profile = {
     caption: "Fig. 0 — Benjamin Abensur, Lausanne",
   },
   facts: [
-    { label: "Field", value: "Communication Systems, BSc" },
+    { label: "Field", value: "BSc in Communication Systems (IC)" },
     { label: "School", value: "EPFL, Lausanne" },
-    { label: "Expected graduation", value: "2028" },
+    { label: "Expected graduation", value: "Jan 2028" },
+    { label: "Now", value: "AI Engineer (part-time) at Biosynex · Teaching Assistant at EPFL" },
     { label: "Looking for", value: "Software engineering or applied ML, Summer 2027" },
     { label: "Languages", value: "French (native), English (fluent), Hebrew (basic), Spanish (basic)" },
   ] satisfies Fact[],
